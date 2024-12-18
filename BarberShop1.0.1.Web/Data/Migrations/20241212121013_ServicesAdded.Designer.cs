@@ -4,6 +4,7 @@ using BarberShop1._0._1.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,64 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop1._0._1.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241212121013_ServicesAdded")]
+    partial class ServicesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.Barber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Barbers");
-                });
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.BarberAvailability", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AvailableFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("AvailableTo")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("BarberId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarberId");
-
-                    b.ToTable("BarberAvailabilities");
-                });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.ServiceModel", b =>
                 {
@@ -87,12 +42,6 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<int?>("SelectedBarberId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SelectedTimeSlotId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -240,15 +189,15 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                         {
                             Id = "85aa7c1d-e0ac-48b7-a71c-fbed3719020e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88259879-1390-4ee2-b11f-e3282f679fc9",
+                            ConcurrencyStamp = "75c1993a-6084-4409-a6f5-e155e115b714",
                             Email = "G221210571@sakarya.edu.tr",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "G221210571@SAKARYA.EDU.TR",
                             NormalizedUserName = "G221210571@SAKARYA.EDU.TR",
-                            PasswordHash = "AQAAAAIAAYagAAAAENoyXXUYdgtjKyrnAO1e0MXHW9JtCCQIixKpMsGxaLL0sSTgw9oWeaWP+PDxAy1Qbg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECR5Zaw0dPuK4pnfizg88dWnwB9YrcAqcDQ7r8qaRYj5r8nsiSTXA5ccpOC6wyHlaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "545dc47a-409e-4246-9421-b565d4796af9",
+                            SecurityStamp = "d8d52f65-6569-4784-b55e-0a55b33aaae4",
                             TwoFactorEnabled = false,
                             UserName = "G221210571@sakarya.edu.tr"
                         });
@@ -346,32 +295,6 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ServiceBarber", b =>
-                {
-                    b.Property<int>("BarberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BarberId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("ServiceBarber");
-                });
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.BarberAvailability", b =>
-                {
-                    b.HasOne("BarberShop1._0._1.Web.Models.Barber", "Barber")
-                        .WithMany("Availabilities")
-                        .HasForeignKey("BarberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barber");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -421,26 +344,6 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ServiceBarber", b =>
-                {
-                    b.HasOne("BarberShop1._0._1.Web.Models.Barber", null)
-                        .WithMany()
-                        .HasForeignKey("BarberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BarberShop1._0._1.Web.Models.ServiceModel", null)
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.Barber", b =>
-                {
-                    b.Navigation("Availabilities");
                 });
 #pragma warning restore 612, 618
         }

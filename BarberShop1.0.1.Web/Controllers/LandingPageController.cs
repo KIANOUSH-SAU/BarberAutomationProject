@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace BarberShop1._0._1.Web.Controllers
 {
-    public class BookingPageController : Controller
+    public class LandingPageController : Controller
     {
-        private readonly ILogger<BookingPageController> _logger;
+        private readonly ILogger<LandingPageController> _logger;
 
-        public BookingPageController(ILogger<BookingPageController> logger)
+        public LandingPageController(ILogger<LandingPageController> logger)
         {
             _logger = logger;
         }

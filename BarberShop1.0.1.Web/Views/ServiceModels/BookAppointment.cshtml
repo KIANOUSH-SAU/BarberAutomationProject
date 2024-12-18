@@ -1,0 +1,63 @@
+﻿@model BarberShop1._0._1.Web.Models.ServiceModel
+
+
+@{
+    ViewData["Title"] = "Randevu al";
+}
+
+<h1>Randevu alma işlemini tamamla</h1>
+
+<div>
+    <h4>ServiceModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DurationInMinutes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DurationInMinutes)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <form asp-action="BookAppointment" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <select asp-for="SelectedBarberId" class="form-control" asp-items="ViewBag.Barbers">
+                <option value="">-- Personel Seçimi --</option>
+            </select>
+            <span asp-validation-for="SelectedBarberId" class="text-danger"></span>
+        </div>
+        <!--Modify for choosing a date-->
+        
+        <div class="form-group">
+            <select asp-for="SelectedTimeSlotId" class="form-control" asp-items="ViewBag.AvailableSlots">
+                <option value="">-- Tarih ve Saat seçimi --</option>
+            </select>
+            <span asp-validation-for="SelectedTimeSlotId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Randevu al" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <a asp-action="Index">Back to List</a>
+</div>

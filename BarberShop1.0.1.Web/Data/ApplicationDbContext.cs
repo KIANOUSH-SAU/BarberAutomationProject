@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BarberShop1._0._1.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BarberShop1._0._1.Web.Data
 {
@@ -11,9 +13,31 @@ namespace BarberShop1._0._1.Web.Data
         {
         }
 
+        public DbSet<ServiceModel> Services { get; set; }
+        public DbSet<Barber> Barbers { get; set; }
+        public DbSet<BarberAvailability> BarberAvailabilities { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ServiceModel>()
+            .HasMany(s => s.Barbers)
+            .WithMany(b => b.Services)
+            .UsingEntity<Dictionary<string, object>>(
+                "ServiceBarber",
+                sb => sb.HasOne<Barber>().WithMany().HasForeignKey("BarberId"),
+                sb => sb.HasOne<ServiceModel>().WithMany().HasForeignKey("ServiceId")
+            );
+
+            builder.Entity<BarberAvailability>()
+            .HasOne(ba => ba.Barber)
+            .WithMany(b => b.Availabilities)
+            .HasForeignKey(ba => ba.BarberId);
+
+
+
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole
                 {

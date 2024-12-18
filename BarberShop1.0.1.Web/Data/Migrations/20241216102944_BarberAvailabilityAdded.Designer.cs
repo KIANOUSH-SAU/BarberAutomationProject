@@ -4,6 +4,7 @@ using BarberShop1._0._1.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop1._0._1.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241216102944_BarberAvailabilityAdded")]
+    partial class BarberAvailabilityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasIndex("BarberId");
 
-                    b.ToTable("BarberAvailabilities");
+                    b.ToTable("BarberAvailability");
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.ServiceModel", b =>
@@ -87,12 +90,6 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<int?>("SelectedBarberId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SelectedTimeSlotId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -240,15 +237,15 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                         {
                             Id = "85aa7c1d-e0ac-48b7-a71c-fbed3719020e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88259879-1390-4ee2-b11f-e3282f679fc9",
+                            ConcurrencyStamp = "8fede4a5-69fd-4a0b-b7b6-6d41a3224347",
                             Email = "G221210571@sakarya.edu.tr",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "G221210571@SAKARYA.EDU.TR",
                             NormalizedUserName = "G221210571@SAKARYA.EDU.TR",
-                            PasswordHash = "AQAAAAIAAYagAAAAENoyXXUYdgtjKyrnAO1e0MXHW9JtCCQIixKpMsGxaLL0sSTgw9oWeaWP+PDxAy1Qbg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECAezsdriQ8vQjB1nP28oNGkwlltf35KLxVXOPEQEb86d418Nre9YUPeOFntqnT1eA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "545dc47a-409e-4246-9421-b565d4796af9",
+                            SecurityStamp = "5b0a412a-9cfb-47b8-804c-70ef96b6534b",
                             TwoFactorEnabled = false,
                             UserName = "G221210571@sakarya.edu.tr"
                         });
