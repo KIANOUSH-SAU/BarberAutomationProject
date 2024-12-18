@@ -1,4 +1,4 @@
-﻿@model BarberShop1._0._1.Web.Models.ServiceModel
+﻿@model BarberShop1._0._1.Web.Models.BookAppointmentViewModel
 
 
 @{
@@ -8,56 +8,80 @@
 <h1>Randevu alma işlemini tamamla</h1>
 
 <div>
-    <h4>ServiceModel</h4>
+    <h4>Hizmet Bilgileri</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DurationInMinutes)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DurationInMinutes)
-        </dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Service.Name)</dt>
+        <dd class="col-sm-10">@Model.Service.Name</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Service.Price)</dt>
+        <dd class="col-sm-10">@Model.Service.Price</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Service.DurationInMinutes)</dt>
+        <dd class="col-sm-10">@Model.Service.DurationInMinutes dakika</dd>
     </dl>
 </div>
+
+
+
+
 <div>
-
     <form asp-action="BookAppointment" method="post">
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" readonly />
-        </div>
-        <div class="form-group">
-            <select asp-for="SelectedBarberId" class="form-control" asp-items="ViewBag.Barbers">
-                <option value="">-- Personel Seçimi --</option>
-            </select>
-            <span asp-validation-for="SelectedBarberId" class="text-danger"></span>
-        </div>
-        <!--Modify for choosing a date-->
-        
-        <div class="form-group">
-            <select asp-for="SelectedTimeSlotId" class="form-control" asp-items="ViewBag.AvailableSlots">
-                <option value="">-- Tarih ve Saat seçimi --</option>
-            </select>
-            <span asp-validation-for="SelectedTimeSlotId" class="text-danger"></span>
-        </div>
+        <!-- Hidden Service ID -->
+        <input type="hidden" asp-for="Service.Id" />
+
 
         <div class="form-group">
-            <input type="submit" value="Randevu al" class="btn btn-primary" />
+            <label for="SelectedBarberId">Personel Seçimi</label>
+            <select asp-for="SelectedBarberId" class="form-control" onchange="handleBarberChange(this)">
+                <option value="">-- Personel Seçimi --</option>
+                @foreach (var barber in Model.Barbers){
+                    <option value="@barber.Id">
+                        @barber.Name (Available Slots: @barber.Availabilities?.Count())
+                    </option>     
+                }
+            </select>
+        </div>
+        <script>
+            function handleBarberChange(dropdown) {
+                const selectedBarberId = dropdown.value;
+
+                // Send the selected ID to the server
+                fetch(`/ServiceModels/GetAvailableSlots?barberId=${selectedBarberId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Available Slots: ", data);
+
+                        // Update other parts of the UI dynamically based on the response
+                        // Example: Populate a time slots dropdown
+                        const timeSlotsDropdown = document.getElementById("TimeSlotDropdown");
+                        timeSlotsDropdown.innerHTML = ""; // Clear existing options
+                        timeSlotsDropdown.insertAdjacentHTML('beforeend', '<option value="">-- Tarih ve Saat Seçimi --</option>');
+                        data.forEach(slot => {
+                            timeSlotsDropdown.insertAdjacentHTML('beforeend', `<option value="${slot.id}">${slot.time}</option>`);
+                        });
+                    })
+                    .catch(error => console.error("Error fetching available slots: ", error));
+            }
+        </script>
+
+        <!-- Time Slot Dropdown -->
+        <div class="form-group">
+            <label for="TimeSlotDropdown">Tarih ve Saat Seçimi</label>
+            <select id="TimeSlotDropdown" class="form-control">
+                <option value="">-- Tarih ve Saat Seçimi --</option>
+            </select>
+        </div>
+
+
+        <!-- Submit Button -->
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Randevu al</button>
         </div>
     </form>
 
-    <a asp-action="Index">Back to List</a>
+    <!-- Back Link -->
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+    </div>
 </div>

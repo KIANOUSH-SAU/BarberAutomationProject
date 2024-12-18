@@ -46,57 +46,70 @@ namespace BarberShop1._0._1.Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> BookAppointment(int? id)
+        public async Task<IActionResult> BookAppointment(int? id, ServiceModel model)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var serviceModel = await _context.Services
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (serviceModel == null)
+            var service = await _context.Services
+            .Where(s => s.Id == id)
+            .Select(s => new ServiceModel
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Price = s.Price,
+                DurationInMinutes = s.DurationInMinutes
+            })
+            .FirstOrDefaultAsync();
+
+            if (service == null)
             {
                 return NotFound();
             }
 
 
-
-
             var barbers = await _context.Barbers
             .Where(b => b.Services.Any(s => s.Id == id))
-            .Select(b => new SelectListItem
+            .Select(b => new Barber
             {
-                Value = b.Id.ToString(), // Barber ID
-                Text = b.Name // Barber name for display
+                Id = b.Id,
+                Name = b.Name,
+                Availabilities = b.Availabilities,
             })
             .ToListAsync();
 
-
-
-            ViewBag.Barbers = barbers;
-
-
-            var barberIds = barbers.Select(b => int.Parse(b.Value)).ToList();
-
-            var availabilities = await _context.BarberAvailabilities
-                .Where(ba => barberIds.Contains(ba.BarberId) && !ba.IsBooked)
-                .Select(ba => new SelectListItem
+            var viewModel = new BookAppointmentViewModel
+            {
+                Service = new ServiceModel
                 {
-                    Value = ba.Id.ToString(),
-                    Text = ba.AvailableFrom.ToString(),
+                    Id = service.Id,
+                    Name = service.Name,
+                    Price = service.Price,
+                    DurationInMinutes = service.DurationInMinutes
+                },
+                Barbers = barbers
+            };
 
-                })
-                .ToListAsync();
-
-            ViewBag.AvailableSlots = availabilities;
-
-
-
-            return View(serviceModel);
+            return View(viewModel);
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAvailableSlots(int barberId)
+        {
+            var availableSlots = await _context.BarberAvailabilities
+                .Where(ba => ba.BarberId == barberId && !ba.IsBooked)
+                .Select(ba => new
+                {
+                    id = ba.Id,
+                    time = ba.AvailableFrom.ToString("HH:mm") // Format the time as needed
+                })
+                .ToListAsync();
+
+            return Json(availableSlots);
+        }
 
 
 
@@ -106,46 +119,12 @@ namespace BarberShop1._0._1.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BookAppointment([Bind("Id,Name,Price,DurationInMinutes")] ServiceModel model)
+        public async Task<IActionResult> BookAppointment(BookAppointmentViewModel model)
         {
-            /*if (ModelState.IsValid)
-            {
 
-
-                if (model.SelectedBarberId == null)
-                {
-                    ModelState.AddModelError("", "Please select a barber.");
-                    return View(model);
-                }
-
-                var availableSlots = await _context.BarberAvailabilities
-                .Where(ba => ba.BarberId == model.SelectedBarberId
-                             && !ba.IsBooked
-                             && ba.AvailableFrom.Date == model.DesiredTime.Value.Date) // Match date
-                .Select(ba => new SelectListItem
-                {
-                    Value = ba.Id.ToString(), // Slot ID
-                    Text = $"{ba.AvailableFrom:HH:mm} - {ba.AvailableTo:HH:mm}" // Time range
-                })
-                .ToListAsync();
-
-                if (!availableSlots.Any())
-                {
-                    ModelState.AddModelError("", "No available slots for the selected barber and time.");
-                }
-
-                model.AvailableSlots = availableSlots;
-
-                return View(model);
-
-            }*/
             return View(model);
             
         }
-
-
-
-
 
         // GET: ServiceModels/Create
         public IActionResult Create()
