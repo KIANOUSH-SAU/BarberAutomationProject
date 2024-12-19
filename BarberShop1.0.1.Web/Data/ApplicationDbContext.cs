@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace BarberShop1._0._1.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,7 +23,7 @@ namespace BarberShop1._0._1.Web.Data
             base.OnModelCreating(builder);
 
             builder.Entity<ServiceModel>()
-            .HasMany(s => s.Barbers)
+            .HasMany(s => s.Barbers)  
             .WithMany(b => b.Services)
             .UsingEntity<Dictionary<string, object>>(
                 "ServiceBarber",
@@ -58,8 +58,8 @@ namespace BarberShop1._0._1.Web.Data
                     Name = "Admin",
                     NormalizedName = "ADMIN",
                 });
-            var hasher = new PasswordHasher<IdentityUser>();
-            builder.Entity<IdentityUser>().HasData(new IdentityUser
+            var hasher = new PasswordHasher<ApplicationUser>();
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = "85aa7c1d-e0ac-48b7-a71c-fbed3719020e",
                 Email = "G221210571@sakarya.edu.tr",
@@ -68,6 +68,8 @@ namespace BarberShop1._0._1.Web.Data
                 NormalizedUserName = "G221210571@SAKARYA.EDU.TR",
                 PasswordHash = hasher.HashPassword(null, "sau"),
                 EmailConfirmed = true,
+                FirstName = "Default",
+                LastName = "Admin"
             });
 
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
