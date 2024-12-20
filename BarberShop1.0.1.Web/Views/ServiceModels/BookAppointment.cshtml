@@ -29,6 +29,7 @@
     <form asp-action="BookAppointment" method="post">
         <!-- Hidden Service ID -->
         <input type="hidden" asp-for="Service.Id" />
+        <input type="hidden" asp-for="Service.Name" />
         <div class="form-group">
             <label for="SelectedBarberId">Personel Seçimi</label>
             <select asp-for="SelectedBarberId" class="form-control" onchange="handleBarberChange(this)">
@@ -65,12 +66,35 @@
 
         <!-- Time Slot Dropdown -->
         <div class="form-group">
-            <label for="TimeSlotDropdown">Tarih ve Saat Seçimi</label>
-            <select id="TimeSlotDropdown" name="SelectedTimeSlotId" class="form-control">
+            <label for="TimeSlotDropdown" >Tarih ve Saat Seçimi</label>
+            <select asp-for="SelectedTimeSlotId" id="TimeSlotDropdown" name="SelectedTimeSlotId" class="form-control">
                 <option value="">-- Tarih ve Saat Seçimi --</option>
             </select>
         </div>
 
+
+
+
+
+
+        <div class="form-group">
+            <label asp-for="CustomerName" class="control-label"></label>
+            <input asp-for="CustomerName" class="form-control" />
+            <span asp-validation-for="CustomerName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CustomerSurname" class="control-label"></label>
+            <input asp-for="CustomerSurname" class="form-control" />
+            <span asp-validation-for="CustomerSurname" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="CustomerEmail" class="control-label"></label>
+            <input asp-for="CustomerEmail" class="form-control" />
+            <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+        </div>
 
         <!-- Submit Button -->
         <div class="form-group mt-3">

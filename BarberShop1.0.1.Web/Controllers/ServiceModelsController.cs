@@ -6,17 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BarberShop1._0._1.Web.Data;
+using BarberShop1._0._1.Web.Services;
 using BarberShop1._0._1.Web.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace BarberShop1._0._1.Web.Controllers
 {
     public class ServiceModelsController : Controller
     {
+        private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
-        public ServiceModelsController(ApplicationDbContext context)
+        public ServiceModelsController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
 
         // GET: ServiceModels
@@ -46,14 +50,13 @@ namespace BarberShop1._0._1.Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> BookAppointment(int? id, ServiceModel model)
+        public async Task<IActionResult> BookAppointment(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            // Fetch the selected service
             var service = await _context.Services
                 .Where(s => s.Id == id)
                 .Select(s => new ServiceModel
@@ -70,32 +73,21 @@ namespace BarberShop1._0._1.Web.Controllers
                 return NotFound();
             }
 
-            // Fetch barbers offering the selected service
             var barbers = await _context.Barbers
                 .Where(b => b.Services.Any(s => s.Id == id))
                 .Select(b => new Barber
                 {
                     Id = b.Id,
                     Name = b.Name,
-                    Availabilities = b.Availabilities.Where(a => !a.IsBooked).ToList() // Fetch only available slots
+                    Availabilities = b.Availabilities.Where(a => !a.IsBooked).ToList()
                 })
                 .ToListAsync();
 
-            // Create the ViewModel
             var viewModel = new BookAppointmentViewModel
             {
-                Service = new ServiceModel
-                {
-                    Id = service.Id,
-                    Name = service.Name,
-                    Price = service.Price,
-                    DurationInMinutes = service.DurationInMinutes
-                },
+                Service = service, // Use the fetched service
                 Barbers = barbers,
-                Availabilities = barbers
-                    .SelectMany(b => b.Availabilities)
-                    .Where(a => !a.IsBooked) // Flatten all availabilities
-                    .ToList()
+                Availabilities = barbers.SelectMany(b => b.Availabilities).Where(a => !a.IsBooked).ToList()
             };
 
             return View(viewModel);
@@ -126,53 +118,69 @@ namespace BarberShop1._0._1.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BookAppointment(BookAppointmentViewModel model)
         {
-
-
-            if (model == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest("The form data is invalid.");
+                // Re-populate dropdowns if validation fails
+                model.Barbers = await _context.Barbers
+                    .Where(b => b.Services.Any(s => s.Id == model.Service.Id)) 
+                    .ToListAsync();
+
+                model.Availabilities = await _context.BarberAvailabilities
+                    .Where(ba => !ba.IsBooked)
+                    .ToListAsync();
+
+                return View(model);
             }
 
-            try
+
+            var barber = await _context.Barbers.FindAsync(model.SelectedBarberId);
+            var service = await _context.Services.FindAsync(model.Service.Id);
+            var availability = await _context.BarberAvailabilities.FindAsync(model.SelectedTimeSlotId);
+
+            if (barber == null || service == null || availability == null)
             {
-                // Fetch the related entities
-                var barber = await _context.Barbers.FindAsync(model.SelectedBarberId);
-                var service = await _context.Services.FindAsync(model.Service.Id);
-                var availability = await _context.BarberAvailabilities.FindAsync(model.SelectedTimeSlotId);
-
-                if (barber == null || service == null || availability == null)
-                {
-                    return NotFound();
-                }
-
-                // Create the appointment record
-                var appointment = new AppointmentRecords
-                {
-                    BarberId = barber.Id,
-                    Barber = barber,
-                    ServiceId = service.Id,
-                    Service = service,
-                    CustomerName = "",//model.CustomerName,
-                    CustomerSurname = "",//model.CustomerSurname,
-                    CustomerEmail = "",//model.CustomerEmail,
-                    AppointmentDateTime = availability.AvailableFrom
-                };
-
-                // Mark the availability slot as booked
-                availability.IsBooked = true;
-
-                // Save the appointment
-                _context.AppointmentRecords.Add(appointment);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("BookingConfirmation");
+                return NotFound("Invalid selection.");
             }
-            catch (Exception ex)
+
+
+            // Generate a confirmation token
+            var token = Guid.NewGuid().ToString();
+
+            // Create the appointment record
+            // Create the appointment record
+            var appointment = new AppointmentRecords
             {
-                // Log the exception for debugging
-                Console.WriteLine($"Error: {ex.Message}");
-                return StatusCode(500, "An error occurred while processing the appointment.");
-            }
+                BarberId = barber.Id,
+                ServiceId = service.Id,
+                CustomerName = model.CustomerName,
+                CustomerSurname = model.CustomerSurname,
+                CustomerEmail = model.CustomerEmail,
+                AppointmentDateTime = availability.AvailableFrom,
+                ConfirmationToken = token,
+                IsConfirmed = false
+            };
+
+            _context.AppointmentRecords.Add(appointment);
+            await _context.SaveChangesAsync();
+
+            // Generate the confirmation link
+            var confirmationUrl = Url.Action(
+                "ConfirmAppointment",
+                "Appointments",
+                new { token },
+                Request.Scheme
+            );
+
+            // Email content
+            var emailContent = $@"
+            <p>Dear {model.CustomerName},</p>
+            <p>Please confirm your appointment by clicking the link below:</p>
+            <p><a href='{confirmationUrl}'>Confirm Appointment</a></p>";
+
+            // Send the confirmation email
+            await _emailSender.SendEmailAsync(model.CustomerEmail, "Confirm Your Appointment", emailContent);
+
+            return RedirectToAction("BookingConfirmation");
         }
 
         // GET: ServiceModels/Create

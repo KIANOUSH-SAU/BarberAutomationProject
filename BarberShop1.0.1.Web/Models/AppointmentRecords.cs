@@ -14,5 +14,8 @@
         public string? CustomerEmail { get; set; }
 
         public DateTime AppointmentDateTime { get; set; }
+
+        public string ConfirmationToken { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

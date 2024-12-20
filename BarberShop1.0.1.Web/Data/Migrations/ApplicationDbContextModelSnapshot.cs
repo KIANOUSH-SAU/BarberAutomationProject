@@ -150,7 +150,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("AppointmentRecords");
+                    b.ToTable("AppointmentRecords", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.Barber", b =>
@@ -171,7 +171,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Barbers");
+                    b.ToTable("Barbers", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.BarberAvailability", b =>
@@ -198,7 +198,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasIndex("BarberId");
 
-                    b.ToTable("BarberAvailabilities");
+                    b.ToTable("BarberAvailabilities", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.ServiceModel", b =>
@@ -227,7 +227,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -406,7 +406,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("ServiceBarber");
+                    b.ToTable("ServiceBarber", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.AppointmentRecords", b =>
