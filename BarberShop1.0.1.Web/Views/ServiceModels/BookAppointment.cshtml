@@ -29,8 +29,6 @@
     <form asp-action="BookAppointment" method="post">
         <!-- Hidden Service ID -->
         <input type="hidden" asp-for="Service.Id" />
-
-
         <div class="form-group">
             <label for="SelectedBarberId">Personel Seçimi</label>
             <select asp-for="SelectedBarberId" class="form-control" onchange="handleBarberChange(this)">
@@ -68,7 +66,7 @@
         <!-- Time Slot Dropdown -->
         <div class="form-group">
             <label for="TimeSlotDropdown">Tarih ve Saat Seçimi</label>
-            <select id="TimeSlotDropdown" class="form-control">
+            <select id="TimeSlotDropdown" name="SelectedTimeSlotId" class="form-control">
                 <option value="">-- Tarih ve Saat Seçimi --</option>
             </select>
         </div>

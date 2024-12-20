@@ -4,6 +4,7 @@ using BarberShop1._0._1.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop1._0._1.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241219121240_BarbersScaffoldMig")]
+    partial class BarbersScaffoldMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +102,7 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                         {
                             Id = "85aa7c1d-e0ac-48b7-a71c-fbed3719020e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a75db91-06d4-4632-a601-b4ee2edd4903",
+                            ConcurrencyStamp = "fde1ada2-1b3b-4948-a5a4-6540e2a8d60f",
                             Email = "G221210571@sakarya.edu.tr",
                             EmailConfirmed = true,
                             FirstName = "Default",
@@ -107,50 +110,12 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "G221210571@SAKARYA.EDU.TR",
                             NormalizedUserName = "G221210571@SAKARYA.EDU.TR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHXwYFGWuCOGL6Skwk9WdQhLbntROXdWDICpM+ObwR51pelUASZeIW8OZCt0QSJOtA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKxFAeoyR9FWwl2jxp0MjE777mlpmKvDp5PbHhtKGQKoS03S9SQeuzoQNCgKMy5s0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3c5602d-1923-4c4d-b9cc-ea83ed7a9df1",
+                            SecurityStamp = "c96026b8-c9f1-4853-b0e2-e17292575c58",
                             TwoFactorEnabled = false,
                             UserName = "G221210571@sakarya.edu.tr"
                         });
-                });
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.AppointmentRecords", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AppointmentDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("BarberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerSurname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarberId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("AppointmentRecords");
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.Barber", b =>
@@ -407,25 +372,6 @@ namespace BarberShop1._0._1.Web.Data.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("ServiceBarber");
-                });
-
-            modelBuilder.Entity("BarberShop1._0._1.Web.Models.AppointmentRecords", b =>
-                {
-                    b.HasOne("BarberShop1._0._1.Web.Models.Barber", "Barber")
-                        .WithMany()
-                        .HasForeignKey("BarberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BarberShop1._0._1.Web.Models.ServiceModel", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barber");
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("BarberShop1._0._1.Web.Models.BarberAvailability", b =>

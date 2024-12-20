@@ -53,33 +53,35 @@ namespace BarberShop1._0._1.Web.Controllers
                 return NotFound();
             }
 
+            // Fetch the selected service
             var service = await _context.Services
-            .Where(s => s.Id == id)
-            .Select(s => new ServiceModel
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Price = s.Price,
-                DurationInMinutes = s.DurationInMinutes
-            })
-            .FirstOrDefaultAsync();
+                .Where(s => s.Id == id)
+                .Select(s => new ServiceModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    DurationInMinutes = s.DurationInMinutes
+                })
+                .FirstOrDefaultAsync();
 
             if (service == null)
             {
                 return NotFound();
             }
 
-
+            // Fetch barbers offering the selected service
             var barbers = await _context.Barbers
-            .Where(b => b.Services.Any(s => s.Id == id))
-            .Select(b => new Barber
-            {
-                Id = b.Id,
-                Name = b.Name,
-                Availabilities = b.Availabilities,
-            })
-            .ToListAsync();
+                .Where(b => b.Services.Any(s => s.Id == id))
+                .Select(b => new Barber
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Availabilities = b.Availabilities.Where(a => !a.IsBooked).ToList() // Fetch only available slots
+                })
+                .ToListAsync();
 
+            // Create the ViewModel
             var viewModel = new BookAppointmentViewModel
             {
                 Service = new ServiceModel
@@ -89,11 +91,14 @@ namespace BarberShop1._0._1.Web.Controllers
                     Price = service.Price,
                     DurationInMinutes = service.DurationInMinutes
                 },
-                Barbers = barbers
+                Barbers = barbers,
+                Availabilities = barbers
+                    .SelectMany(b => b.Availabilities)
+                    .Where(a => !a.IsBooked) // Flatten all availabilities
+                    .ToList()
             };
 
             return View(viewModel);
-
         }
 
         [HttpGet]
@@ -122,8 +127,52 @@ namespace BarberShop1._0._1.Web.Controllers
         public async Task<IActionResult> BookAppointment(BookAppointmentViewModel model)
         {
 
-            return View(model);
-            
+
+            if (model == null)
+            {
+                return BadRequest("The form data is invalid.");
+            }
+
+            try
+            {
+                // Fetch the related entities
+                var barber = await _context.Barbers.FindAsync(model.SelectedBarberId);
+                var service = await _context.Services.FindAsync(model.Service.Id);
+                var availability = await _context.BarberAvailabilities.FindAsync(model.SelectedTimeSlotId);
+
+                if (barber == null || service == null || availability == null)
+                {
+                    return NotFound();
+                }
+
+                // Create the appointment record
+                var appointment = new AppointmentRecords
+                {
+                    BarberId = barber.Id,
+                    Barber = barber,
+                    ServiceId = service.Id,
+                    Service = service,
+                    CustomerName = "",//model.CustomerName,
+                    CustomerSurname = "",//model.CustomerSurname,
+                    CustomerEmail = "",//model.CustomerEmail,
+                    AppointmentDateTime = availability.AvailableFrom
+                };
+
+                // Mark the availability slot as booked
+                availability.IsBooked = true;
+
+                // Save the appointment
+                _context.AppointmentRecords.Add(appointment);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("BookingConfirmation");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, "An error occurred while processing the appointment.");
+            }
         }
 
         // GET: ServiceModels/Create

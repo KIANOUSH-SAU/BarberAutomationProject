@@ -17,10 +17,25 @@ namespace BarberShop1._0._1.Web.Data
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<BarberAvailability> BarberAvailabilities { get; set; }
 
+        public DbSet<AppointmentRecords> AppointmentRecords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+
+
+            builder.Entity<AppointmentRecords>()
+            .HasOne(ar => ar.Barber)
+            .WithMany()
+            .HasForeignKey(ar => ar.BarberId);
+
+            builder.Entity<AppointmentRecords>()
+            .HasOne(ar => ar.Service)
+            .WithMany()
+            .HasForeignKey(ar => ar.ServiceId);
+
+
 
             builder.Entity<ServiceModel>()
             .HasMany(s => s.Barbers)  

@@ -2,8 +2,13 @@
 
 public class BookAppointmentViewModel
 {
-    public ServiceModel Service { get; set; }
-    public ICollection<Barber> Barbers { get; set; }
-    public ICollection<BarberAvailability> Availabilities { get; set; }
+    public int SelectedServiceId { get; set; }
+    public int? SelectedTimeSlotId { get; set; }
     public int? SelectedBarberId { get; set; }
+    public ServiceModel Service { get; set; }
+    public ICollection<Barber> ?Barbers { get; set; }
+    public ICollection<BarberAvailability>? Availabilities { get; set; }
+    public string? CustomerName { get; set; }
+    public string? CustomerSurname { get; set; }
+    public string? CustomerEmail { get; set; }
 }

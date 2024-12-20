@@ -5,7 +5,8 @@
         public int Id { get; set; } // Primary Key
         public string Name { get; set; } // Barber's Name
         public string PhoneNumber { get; set; } // Barber's Contact Information (optional)
-        public ICollection<ServiceModel> Services { get; set; } // Navigation property for many-to-many relationship
-        public ICollection<BarberAvailability> Availabilities { get; set; }
+        public ICollection<ServiceModel> Services { get; set; } = new List<ServiceModel>();
+
+        public ICollection<BarberAvailability> Availabilities { get; set; } = new List<BarberAvailability>();
     }
 }

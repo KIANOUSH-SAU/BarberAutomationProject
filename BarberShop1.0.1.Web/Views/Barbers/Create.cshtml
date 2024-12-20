@@ -1,0 +1,66 @@
+﻿@model BarberShop1._0._1.Web.Models.Barber
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Barber</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Dropdown for Services -->
+            <!-- Services Selection (Checkboxes) -->
+            <div class="form-group">
+                <label>Services</label>
+                @foreach (var service in ViewBag.Services)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" name="SelectedServiceIds" value="@service.Value" class="form-check-input" id="service_@service.Value" />
+                        <label class="form-check-label" for="service_@service.Value">@service.Text</label>
+                    </div>
+                }
+            </div>
+
+
+
+            <div class="form-group">
+                <label>Availability Hours</label>
+                @foreach (var hour in ViewBag.PredefinedHours)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" name="SelectedHours" value="@hour.Value" class="form-check-input" id="hour_@hour.Value" @(hour.Selected ? "checked" : "") />
+                        <label class="form-check-label" for="hour_@hour.Value">@hour.Text</label>
+                    </div>
+                }
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
