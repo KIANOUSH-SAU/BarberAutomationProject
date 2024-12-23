@@ -180,8 +180,20 @@ namespace BarberShop1._0._1.Web.Controllers
             // Send the confirmation email
             await _emailSender.SendEmailAsync(model.CustomerEmail, "Confirm Your Appointment", emailContent);
 
-            return RedirectToAction("BookingConfirmation");
+            return RedirectToAction("BookingConfirmation", new { name = model.CustomerName });
+
         }
+
+        [HttpGet]
+        public IActionResult BookingConfirmation(string name)
+        {
+            ViewData["CustomerName"] = name;
+            return View();
+        }
+
+
+
+
 
         // GET: ServiceModels/Create
         public IActionResult Create()
