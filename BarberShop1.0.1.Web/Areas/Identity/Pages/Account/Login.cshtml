@@ -1,4 +1,5 @@
 ﻿@page
+@using BarberShop1._0._1.Web.Common
 @model LoginModel
 
 @{
@@ -7,6 +8,8 @@
 <div class="row">
     <div class="col-md-4">
         <section>
+        @if (!User.IsInRole(Roles.Admin))
+        {
             <form id="account" method="post">
                 <h2>Admin Girişi</h2>
                 <hr />
@@ -43,9 +46,25 @@
                     </p>
  *@
 
-
                 </div>
-            </form>
+                </form>
+            }
+            else
+            {
+                <h2>Admin Olarak Giriş yaptınız!</h2>
+                <br />
+                <div class="row">
+                    <div class="col-auto">
+                        <a class="nav-link text-light btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Admin Profilime Git</a>
+                    </div>
+                    <div class="col-auto">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "LandingPage", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link btn-outline-danger text-dark">Çıkış Yap</button>
+                        </form>
+                    </div>
+                </div>
+
+            }
         </section>
     </div>
     @* <div class="col-md-6 col-md-offset-2"> *@

@@ -2,12 +2,11 @@
 @model BarberShop1._0._1.Web.Models.ServiceModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Oluştur";
 }
 
-<h1>Create</h1>
+<h1>Oluştur</h1>
 
-<h4>ServiceModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -37,14 +36,11 @@
 
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

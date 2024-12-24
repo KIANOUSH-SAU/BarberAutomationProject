@@ -26,13 +26,6 @@ html, body {
 footer {
     flex-shrink: 0; /* Prevent the footer from stretching */
 }
-/* Background styling */
-.custom-background {
-    background-image: url('/images/BarberShopBg.jpeg'); /* Replace with your background image path */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
 
 /* Footer styles */
 footer {
@@ -114,6 +107,31 @@ a {
         color: #1d7ae6;
     }
 
+
+
+
+
+
+
+
+
+
+.image-container {
+    max-width: 800px; /* Limit the image width */
+    margin: 0 auto; /* Center the image */
+    text-align: center;
+}
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 25px; /* Add rounded corners */
+        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for a polished look */
+    }
+
+
+
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
     footer {
@@ -124,3 +142,8 @@ a {
         height: 30px;
     }
 }
+
+
+
+
+

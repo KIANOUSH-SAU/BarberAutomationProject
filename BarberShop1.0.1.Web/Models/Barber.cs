@@ -7,11 +7,11 @@ namespace BarberShop1._0._1.Web.Models
         public int Id { get; set; } // Primary Key
         [Display(Name = "Adı")]
         public string Name { get; set; } // Barber's Name
-        [Display(Name = "Telefon numarası")]
+        [Display(Name = "Telefon Numarası")]
         public string PhoneNumber { get; set; } // Barber's Contact Information (optional)
         [Display(Name = "Hizmetler")]
         public ICollection<ServiceModel> Services { get; set; } = new List<ServiceModel>();
-        [Display(Name = "Çalışma saatleri")]
+        [Display(Name = "Çalışma Saatleri")]
         public ICollection<BarberAvailability> Availabilities { get; set; } = new List<BarberAvailability>();
     }
 }

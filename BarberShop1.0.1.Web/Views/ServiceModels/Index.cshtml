@@ -5,12 +5,18 @@
     ViewData["Title"] = "Hizmetlerimiz";
 }
 
-<h1>Hizmet Seçimi:</h1>
+
 @if (User.IsInRole(Roles.Admin))
 {
+    <h1>Hizmetler listesi:</h1>
+    <br />
     <p>
         <a class="btn btn-primary" asp-action="Create">Yeni hizmet ekle</a>
     </p>
+}
+else
+{
+    <h1>Hizmet Seçimi:</h1>
 }
 <table class="table">
     <thead>

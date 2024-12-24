@@ -1,12 +1,11 @@
 ﻿@model BarberShop1._0._1.Web.Models.Barber
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Düzenle";
 }
 
-<h1>Edit</h1>
+<h1>Düzenle</h1>
 
-<h4>Barber</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,8 +22,16 @@
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Services</label>
+
+
+
+
+
+
+
+            <div class="d-flex justify-content-between">
+            <div class="form-group me-3">
+                <label>Hizmetler</label>
                 @foreach (var service in ViewBag.Services)
                 {
                     <div class="form-check">
@@ -35,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                <label>Availability Hours</label>
+                <label>Çalışma Saatleri</label>
                 @foreach (var hour in ViewBag.PredefinedHours)
                 {
                     <div class="form-check">
@@ -44,16 +51,20 @@
                     </div>
                 }
             </div>
+
+            </div>
+
+
+
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
