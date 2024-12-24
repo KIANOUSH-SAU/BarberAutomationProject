@@ -1,22 +1,126 @@
-html {
-  font-size: 14px;
+/* Global styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 14px;
+    position: relative;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Flexbox layout for the page */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full height of the viewport */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+    .container main {
+        flex: 1; /* Fills the remaining space between header and footer */
+    }
+footer {
+    flex-shrink: 0; /* Prevent the footer from stretching */
+}
+/* Background styling */
+.custom-background {
+    background-image: url('/images/BarberShopBg.jpeg'); /* Replace with your background image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-body {
-  margin-bottom: 60px;
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 10px 0; /* Reduce padding if needed */
+    background-color: #f8f9fa; /* Light gray background */
+    font-size: 0.9rem; /* Adjust font size for better spacing */
+    border-top: 1px solid #ddd; /* Optional border */
+    line-height: 1.5; /* Maintain readable text spacing */
+}
+
+
+/* Button focus and form elements */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Navbar styles */
+.navbar-brand img {
+    height: 40px; /* Adjust the height of the logo */
+}
+
+/* Responsive image */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom card styling for the main content */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #258cfb;
+    color: white;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #258cfb;
+    border-color: #258cfb;
+}
+
+    .btn-primary:hover {
+        background-color: #1d7ae6;
+        border-color: #1d7ae6;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #258cfb;
+}
+
+    a:hover {
+        color: #1d7ae6;
+    }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    footer {
+        font-size: 0.8rem;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+    }
 }

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BarberShop1._0._1.Web.Models.Barber>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Çalışanlar";
 }
 
-<h1>Index</h1>
-
+<h1>Çalışanlar</h1>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Yeni personel ekle</a>
 </p>
 <table class="table">
     <thead>
@@ -54,9 +54,9 @@
                 </ul>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> 
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Detaylar</a> 
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
             </td>
         </tr>
 }
