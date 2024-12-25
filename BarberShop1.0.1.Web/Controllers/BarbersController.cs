@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BarberShop1._0._1.Web.Data;
 using BarberShop1._0._1.Web.Models;
+using BarberShop1._0._1.Web.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BarberShop1._0._1.Web.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class BarbersController : Controller
     {
         private readonly ApplicationDbContext _context;

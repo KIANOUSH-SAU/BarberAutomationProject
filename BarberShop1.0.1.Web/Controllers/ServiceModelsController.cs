@@ -9,6 +9,8 @@ using BarberShop1._0._1.Web.Data;
 using BarberShop1._0._1.Web.Services;
 using BarberShop1._0._1.Web.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Authorization;
+using BarberShop1._0._1.Web.Common;
 
 namespace BarberShop1._0._1.Web.Controllers
 {
@@ -28,26 +30,6 @@ namespace BarberShop1._0._1.Web.Controllers
         {
             return View(await _context.Services.ToListAsync());
         }
-
-        // GET: ServiceModels/Details/5
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var serviceModel = await _context.Services
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (serviceModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(serviceModel);
-        }
-
 
         [HttpGet]
         public async Task<IActionResult> BookAppointment(int? id)
@@ -196,6 +178,7 @@ namespace BarberShop1._0._1.Web.Controllers
 
 
         // GET: ServiceModels/Create
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View();
@@ -204,6 +187,7 @@ namespace BarberShop1._0._1.Web.Controllers
         // POST: ServiceModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,DurationInMinutes")] ServiceModel serviceModel)
@@ -217,7 +201,26 @@ namespace BarberShop1._0._1.Web.Controllers
             return View(serviceModel);
         }
 
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var serviceModel = await _context.Services
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (serviceModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(serviceModel);
+        }
+
         // GET: ServiceModels/Edit/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -236,6 +239,7 @@ namespace BarberShop1._0._1.Web.Controllers
         // POST: ServiceModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,DurationInMinutes")] ServiceModel serviceModel)
@@ -269,6 +273,7 @@ namespace BarberShop1._0._1.Web.Controllers
         }
 
         // GET: ServiceModels/Delete/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -289,6 +294,7 @@ namespace BarberShop1._0._1.Web.Controllers
         // POST: ServiceModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var serviceModel = await _context.Services.FindAsync(id);
