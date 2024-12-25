@@ -28,11 +28,15 @@
                         @if (User.IsInRole(Roles.Admin))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark btn btn-warning" asp-area="" asp-controller="ServiceModels" asp-action="Index">Randevu Yönetim Sayfası</a>
+                                <a class="nav-link text-dark btn btn-warning" asp-area="" asp-controller="ServiceModels" asp-action="Index">Hizmet Yönetim Sayfası</a>
                             </li> 
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark btn btn-info" asp-area="" asp-controller="Barbers" asp-action="Index">Çalışan Yönetim Sayfası</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light btn btn-secondary" asp-area="" asp-controller="AppointmentRecords" asp-action="Index">Randevu Yönetim Sayfası</a>
                             </li>
                         }
                         else

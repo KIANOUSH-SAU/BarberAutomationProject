@@ -12,18 +12,6 @@ namespace BarberShop1._0._1.Web.Services
             var smtpServer = _configuration["EmailSettings:Server"];
             var smtpPort = Convert.ToInt32(_configuration["EmailSettings:Port"]);
             var enableSsl = Convert.ToBoolean(_configuration["EmailSettings:EnableSsl"]);
-            //var message = new MailMessage
-            /*{
-                From = new MailAddress(fromAddress),
-                Subject = subject,
-                Body = htmlMessage,
-                IsBodyHtml = true
-            };
-
-            message.To.Add(new MailAddress(email));
-            using var client = new SmtpClient(smtpServer, smtpPort);
-            await client.SendMailAsync(message);
-        }*/
 
             try
             {
@@ -35,7 +23,6 @@ namespace BarberShop1._0._1.Web.Services
                     IsBodyHtml = true
                 };
 
-                // Add the recipient's email address
                 message.To.Add(new MailAddress(email));
 
                 using var client = new SmtpClient(smtpServer, smtpPort)
@@ -44,7 +31,6 @@ namespace BarberShop1._0._1.Web.Services
                     UseDefaultCredentials = true
                 };
 
-                // Send the email
                 await client.SendMailAsync(message);
             }
             catch (SmtpException ex)

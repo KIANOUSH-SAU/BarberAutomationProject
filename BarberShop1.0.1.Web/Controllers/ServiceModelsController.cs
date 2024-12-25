@@ -155,9 +155,9 @@ namespace BarberShop1._0._1.Web.Controllers
 
             // Email content
             var emailContent = $@"
-            <p>Dear {model.CustomerName},</p>
-            <p>Please confirm your appointment by clicking the link below:</p>
-            <p><a href='{confirmationUrl}'>Confirm Appointment</a></p>";
+            <p>Değerli {model.CustomerName} müşterimiz,</p>
+            <p>Lütfen aşağıdaki linke tıklayarak randevunuzu onaylayın:</p>
+            <p><a href='{confirmationUrl}'>RANDEVUYU ONAYLA</a></p>";
 
             // Send the confirmation email
             await _emailSender.SendEmailAsync(model.CustomerEmail, "Confirm Your Appointment", emailContent);
