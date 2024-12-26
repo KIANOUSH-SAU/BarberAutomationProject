@@ -78,6 +78,8 @@ namespace BarberShop1._0._1.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAvailableSlots(int barberId)
         {
+            var today = DateTime.Today; // Get today's date
+
             var availableSlots = await _context.BarberAvailabilities
                 .Where(ba => ba.BarberId == barberId && !ba.IsBooked)
                 .Select(ba => new
@@ -128,7 +130,6 @@ namespace BarberShop1._0._1.Web.Controllers
             // Generate a confirmation token
             var token = Guid.NewGuid().ToString();
 
-            // Create the appointment record
             // Create the appointment record
             var appointment = new AppointmentRecords
             {

@@ -40,6 +40,7 @@
                     </option>     
                 }
             </select>
+            <span asp-validation-for="SelectedBarberId" class="text-danger"></span>
         </div>
         <script>
             function handleBarberChange(dropdown) {
@@ -65,14 +66,13 @@
         </script>
 
         <!-- Time Slot Dropdown -->
-        <div class="form-group">
-            <label for="TimeSlotDropdown" >Tarih ve Saat Seçimi</label>
+         <div class="form-group">
+            <label for="TimeSlotDropdown" >Saat Seçimi</label>
             <select asp-for="SelectedTimeSlotId" id="TimeSlotDropdown" name="SelectedTimeSlotId" class="form-control">
-                <option value="">-- Tarih ve Saat Seçimi --</option>
+                <option value="">-- Saat Seçimi --</option>
             </select>
+            <span asp-validation-for="SelectedTimeSlotId" class="text-danger"></span>
         </div>
-
-
 
 
 
@@ -96,6 +96,11 @@
             <span asp-validation-for="CustomerEmail" class="text-danger"></span>
         </div>
 
+
+
+
+
+
         <!-- Submit Button -->
         <div class="form-group mt-3">
             <button type="submit" class="btn btn-primary">Randevu al</button>
@@ -104,3 +109,4 @@
     </form>
 
 </div>
+<script type="module" src="~/js/site.js"></script>

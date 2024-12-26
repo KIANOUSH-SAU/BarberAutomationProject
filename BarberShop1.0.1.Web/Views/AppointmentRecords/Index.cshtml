@@ -40,8 +40,23 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @{
+            DateTime? previousDate = null;
+            string currentColor = "lightblue"; // Initial color
+            DateTime today = DateTime.Today;
+        }
+        @foreach (var item in Model.OrderBy(a => a.AppointmentDateTime))
+        {
+            if (previousDate == null || previousDate != item.AppointmentDateTime.Date)
+            {
+                currentColor = currentColor == "lightblue" ? "lightyellow" : "lightblue";
+                previousDate = item.AppointmentDateTime.Date;
+            }
+            if (item.AppointmentDateTime.Date == today)
+            {
+                currentColor = "lightgreen";
+            }
+            <tr style="background-color: @currentColor;">
             <td>
                 @Html.DisplayFor(modelItem => item.Barber.Name)
             </td>
@@ -60,18 +75,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AppointmentDateTime)
             </td>
-@*             <td>
-                @Html.DisplayFor(modelItem => item.ConfirmationToken)
-            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.IsConfirmed)
             </td>
-            <td>
+            @if (item.AppointmentDateTime.Date == today)
+            {
+                <td>
                 <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
-                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
-            </td>
-        </tr>
+                </td>
+            }
+            else
+            {
+                <td>
+                </td>
+            }
+            </tr>
 }
     </tbody>
 </table>
