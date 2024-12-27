@@ -65,9 +65,6 @@ namespace BarberShop1._0._1.Web.Controllers
         }
 
 
-
-
-
         [HttpGet]
         public async Task<IActionResult> BookAppointment(int? id)
         {
