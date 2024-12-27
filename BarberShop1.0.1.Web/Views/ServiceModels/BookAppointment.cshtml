@@ -43,6 +43,29 @@
             <span asp-validation-for="SelectedBarberId" class="text-danger"></span>
         </div>
         <script>
+
+
+
+
+
+
+
+
+
+                document.addEventListener("DOMContentLoaded", () => {
+                // Trigger the UpdateAvailabilities action
+                fetch('/ServiceModels/UpdateAvailabilities', { method: 'POST' })
+                    .then(response => {
+                        if (!response.ok) {
+                            console.error("Error updating availabilities:", response.statusText);
+                        } else {
+                            console.log("Availabilities updated successfully");
+                        }
+                    })
+                    .catch(error => console.error("Fetch error:", error));
+            });
+
+
             function handleBarberChange(dropdown) {
                 const selectedBarberId = dropdown.value;
 
@@ -109,4 +132,3 @@
     </form>
 
 </div>
-<script type="module" src="~/js/site.js"></script>

@@ -31,9 +31,47 @@ namespace BarberShop1._0._1.Web.Controllers
             return View(await _context.Services.ToListAsync());
         }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAvailabilities()
+        {
+            var today = DateTime.Today;
+
+            // Fetch all barber availabilities
+            var barberAvailabilities = await _context.BarberAvailabilities.ToListAsync();
+
+            // Iterate through each availability
+            foreach (var availability in barberAvailabilities)
+            {
+                // Check if the date does not match today's date
+                if (availability.AvailableFrom.Date != today)
+                {
+                    // Update the date to today's date while keeping the time the same
+                    availability.AvailableFrom = new DateTime(today.Year, today.Month, today.Day,
+                                                              availability.AvailableFrom.Hour,
+                                                              availability.AvailableFrom.Minute,
+                                                              availability.AvailableFrom.Second);
+
+                    // Reset isBooked to false for the new day
+                    availability.IsBooked = false;
+                }
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            return Ok("Availabilities updated for the new day.");
+        }
+
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> BookAppointment(int? id)
         {
+            var today = DateTime.Today; // Get today's date
             if (id == null)
             {
                 return NotFound();
@@ -62,6 +100,7 @@ namespace BarberShop1._0._1.Web.Controllers
                     Id = b.Id,
                     Name = b.Name,
                     Availabilities = b.Availabilities.Where(a => !a.IsBooked).ToList()
+
                 })
                 .ToListAsync();
 
