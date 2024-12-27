@@ -44,14 +44,6 @@
         </div>
         <script>
 
-
-
-
-
-
-
-
-
                 document.addEventListener("DOMContentLoaded", () => {
                 // Trigger the UpdateAvailabilities action
                 fetch('/ServiceModels/UpdateAvailabilities', { method: 'POST' })
@@ -79,7 +71,7 @@
                         // Example: Populate a time slots dropdown
                         const timeSlotsDropdown = document.getElementById("TimeSlotDropdown");
                         timeSlotsDropdown.innerHTML = ""; // Clear existing options
-                        timeSlotsDropdown.insertAdjacentHTML('beforeend', '<option value="">-- Tarih ve Saat Seçimi --</option>');
+                        timeSlotsDropdown.insertAdjacentHTML('beforeend', '<option value="">-- Saat Seçimi --</option>');
                         data.forEach(slot => {
                             timeSlotsDropdown.insertAdjacentHTML('beforeend', `<option value="${slot.id}">${slot.time}</option>`);
                         });
