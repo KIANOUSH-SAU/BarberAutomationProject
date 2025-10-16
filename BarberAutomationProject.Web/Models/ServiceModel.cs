@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BarberShop1._0._1.Web.Models
+namespace BarberAutomationProject.Web.Models
 {
     public class ServiceModel
     {

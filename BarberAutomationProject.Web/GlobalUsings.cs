@@ -1,1 +1,1 @@
-﻿global using BarberShop1._0._1.Web.Models;
+﻿global using BarberAutomationProject.Web.Models;

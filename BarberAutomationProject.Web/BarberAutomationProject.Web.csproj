@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-BarberShop1._0._1.Web-098b8e1b-a4ce-4f33-978c-ad347f534b29</UserSecretsId>
+    <UserSecretsId>aspnet-BarberAutomationProject.Web-098b8e1b-a4ce-4f33-978c-ad347f534b29</UserSecretsId>
     <RootNamespace>BarberAutomationProject.Web</RootNamespace>
     <AssemblyName>BarberAutomationProject.Web</AssemblyName>
   </PropertyGroup>

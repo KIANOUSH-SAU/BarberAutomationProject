@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BarberShop1._0._1.Web.Data;
+using BarberAutomationProject.Web.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace BarberShop1._0._1.Web.Controllers
+namespace BarberAutomationProject.Web.Controllers
 {
     public class AppointmentsController : Controller
     {

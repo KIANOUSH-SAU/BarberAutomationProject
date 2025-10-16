@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BarberShop1._0._1.Web.Areas.Identity.Pages.Account.Manage
+namespace BarberAutomationProject.Web.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {

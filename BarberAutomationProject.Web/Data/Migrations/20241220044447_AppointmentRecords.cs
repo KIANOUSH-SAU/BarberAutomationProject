@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BarberShop1._0._1.Web.Data.Migrations
+namespace BarberAutomationProject.Web.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AppointmentRecords : Migration

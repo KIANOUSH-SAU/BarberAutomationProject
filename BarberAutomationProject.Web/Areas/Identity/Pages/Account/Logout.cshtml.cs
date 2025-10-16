@@ -4,14 +4,14 @@
 
 using System;
 using System.Threading.Tasks;
-using BarberShop1._0._1.Web.Models;
+using BarberAutomationProject.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace BarberShop1._0._1.Web.Areas.Identity.Pages.Account
+namespace BarberAutomationProject.Web.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {

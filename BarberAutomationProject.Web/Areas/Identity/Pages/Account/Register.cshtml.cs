@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace BarberShop1._0._1.Web.Areas.Identity.Pages.Account
+namespace BarberAutomationProject.Web.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {

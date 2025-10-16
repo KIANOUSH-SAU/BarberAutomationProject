@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Net.Mail;
 
-namespace BarberShop1._0._1.Web.Services
+namespace BarberAutomationProject.Web.Services
 {
     public class EmailSender(IConfiguration _configuration) : IEmailSender
     {

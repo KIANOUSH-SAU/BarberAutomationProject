@@ -1,8 +1,8 @@
-using BarberShop1._0._1.Web.Models;
+using BarberAutomationProject.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BarberShop1._0._1.Web.Controllers
+namespace BarberAutomationProject.Web.Controllers
 {
     public class LandingPageController : Controller
     {

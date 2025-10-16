@@ -1,6 +1,6 @@
-using BarberShop1._0._1.Web.Data;
-using BarberShop1._0._1.Web.Models;
-using BarberShop1._0._1.Web.Services;
+using BarberAutomationProject.Web.Data;
+using BarberAutomationProject.Web.Models;
+using BarberAutomationProject.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BarberShop1._0._1.Web.Data;
-using BarberShop1._0._1.Web.Models;
-using BarberShop1._0._1.Web.Common;
+using BarberAutomationProject.Web.Data;
+using BarberAutomationProject.Web.Models;
+using BarberAutomationProject.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 
-namespace BarberShop1._0._1.Web.Controllers
+namespace BarberAutomationProject.Web.Controllers
 {
     [Authorize(Roles = Roles.Admin)]
     public class BarbersController : Controller

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace BarberShop1._0._1.Web.Areas.Identity.Pages.Account
+namespace BarberAutomationProject.Web.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {

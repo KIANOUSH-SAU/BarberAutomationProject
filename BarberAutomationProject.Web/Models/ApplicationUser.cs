@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace BarberShop1._0._1.Web.Models
+namespace BarberAutomationProject.Web.Models
 {
     public class ApplicationUser : IdentityUser
     {

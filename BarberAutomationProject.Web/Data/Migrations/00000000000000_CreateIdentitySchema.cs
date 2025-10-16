@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace BarberShop1._0._1.Web.Data.Migrations
+namespace BarberAutomationProject.Web.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

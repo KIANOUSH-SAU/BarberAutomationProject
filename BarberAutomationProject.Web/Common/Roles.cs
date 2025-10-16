@@ -1,4 +1,4 @@
-﻿namespace BarberShop1._0._1.Web.Common
+﻿namespace BarberAutomationProject.Web.Common
 {
     public static class Roles
     {

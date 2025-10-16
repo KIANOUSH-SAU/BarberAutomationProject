@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BarberShop1._0._1.Web.Data;
-using BarberShop1._0._1.Web.Services;
-using BarberShop1._0._1.Web.Models;
+using BarberAutomationProject.Web.Data;
+using BarberAutomationProject.Web.Services;
+using BarberAutomationProject.Web.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Authorization;
-using BarberShop1._0._1.Web.Common;
+using BarberAutomationProject.Web.Common;
 
-namespace BarberShop1._0._1.Web.Controllers
+namespace BarberAutomationProject.Web.Controllers
 {
     public class ServiceModelsController : Controller
     {

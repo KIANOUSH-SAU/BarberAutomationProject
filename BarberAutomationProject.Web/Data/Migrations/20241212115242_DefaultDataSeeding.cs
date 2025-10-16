@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BarberShop1._0._1.Web.Data.Migrations
+namespace BarberAutomationProject.Web.Data.Migrations
 {
     /// <inheritdoc />
     public partial class DefaultDataSeeding : Migration

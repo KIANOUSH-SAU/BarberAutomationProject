@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace BarberShop1._0._1.Web.Areas.Identity.Pages.Account
+namespace BarberAutomationProject.Web.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {

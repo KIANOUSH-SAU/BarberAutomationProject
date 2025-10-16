@@ -1,10 +1,10 @@
-﻿using BarberShop1._0._1.Web.Models;
+﻿using BarberAutomationProject.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
-namespace BarberShop1._0._1.Web.Data
+namespace BarberAutomationProject.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
