@@ -7,6 +7,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") // Vite dev server
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -26,7 +40,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    //app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
+    app.UseCors("AllowReactApp");
 }
 else
 {
@@ -42,9 +58,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=LandingPage}/{action=Index}/{id?}");
-app.MapRazorPages();
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=LandingPage}/{action=Index}/{id?}");
+//app.MapRazorPages();
+
+app.MapControllers();
+app.MapFallbackToFile("index.html"); 
 
 app.Run();
