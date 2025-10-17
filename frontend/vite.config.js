@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://localhost:5001', // Change to your ASP.NET backend port
+        target: 'https://localhost:7261', // Change to your ASP.NET backend port
         changeOrigin: true,
         secure: false,
       }
