@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import Services from "./components/Services";
 
 function App() {
-	const [services, setServices] = useState([]);
+	const [servicesData, setServicesData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -14,7 +14,7 @@ function App() {
 				return res.json();
 			})
 			.then((data) => {
-				setServices(data);
+				setServicesData(data);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -37,26 +37,9 @@ function App() {
 		);
 
 	return (
-		<div className="App">
-			<h1>🔥 Barber Automation System</h1>
-			<h2>Available Services</h2>
-			<div style={{ display: "grid", gap: "20px", padding: "20px" }}>
-				{services.map((service) => (
-					<div
-						key={service.id}
-						style={{
-							border: "1px solid #ccc",
-							padding: "20px",
-							borderRadius: "8px",
-						}}
-					>
-						<h3>{service.name}</h3>
-						<p>💰 Price: ${service.price}</p>
-						<p>⏱️ Duration: {service.durationInMinutes} minutes</p>
-					</div>
-				))}
-			</div>
-		</div>
+		<>
+			<Services services={servicesData} />
+		</>
 	);
 }
 
