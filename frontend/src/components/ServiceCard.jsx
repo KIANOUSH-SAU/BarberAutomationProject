@@ -1,4 +1,4 @@
-import IMAGES from "../assets/assetsHandler";
+import { IMAGES } from "../assets/assetsHandler";
 
 const ServiceCard = ({ service }) => {
 	return (

@@ -5,8 +5,9 @@ import haircare from "./haircare.png"
 import hairdye from "./hairdye.png"
 import beardtrim from "./beardtrim.png"
 import skincare from "./skincare.png"
+import barbershop from "./barbershop.jpeg"
 
-const IMAGES = [
+export const IMAGES = [
     haircut,
     eyebrow,
     blowdryer,
@@ -14,7 +15,6 @@ const IMAGES = [
     hairdye,
     beardtrim,
     skincare
-]
+];
 
-
-export default IMAGES;
+export const homeBackground = barbershop;
