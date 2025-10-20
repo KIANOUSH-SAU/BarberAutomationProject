@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import AppointmentsPage from "./pages/AppointmentsPage";
 import Navbar from "./components/Navbar";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 						path="/appointments"
 						element={<AppointmentsPage />}
 					/>
+					<Route path="/admin" element={<AdminPage />} />
 				</Routes>
 			</div>
 		</Router>

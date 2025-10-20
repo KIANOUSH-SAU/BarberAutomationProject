@@ -61,7 +61,7 @@ const HomePage = () => {
 					<Link to="/services" className="glass-btn-3">
 						Hizmetlerimiz
 					</Link>
-					<Link to="/appointments" className="glass-btn-2">
+					<Link to="/appointments" className="glass-btn-1">
 						Yönetici Girişi
 					</Link>
 				</div>
