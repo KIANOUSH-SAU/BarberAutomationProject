@@ -30,7 +30,7 @@ const HomePage = () => {
 		});
 		glassContainer.addEventListener("mouseleave", () => {
 			gsap.to(glassContainer, {
-				backgroundColor: "rgba(255, 255, 255, 0.1)", // Matches your CSS
+				backgroundColor: "rgba(255, 255, 255, 0.05)", // Matches your CSS
 				duration: 0.4,
 				ease: "power2.out",
 			});
@@ -58,11 +58,11 @@ const HomePage = () => {
 					takibi yapabilir.
 				</p>
 				<div className="space-x-4">
-					<Link to="/services" className="glass-btn-1">
+					<Link to="/services" className="glass-btn-3">
 						Hizmetlerimiz
 					</Link>
 					<Link to="/appointments" className="glass-btn-2">
-						Book Appointment
+						Yönetici Girişi
 					</Link>
 				</div>
 			</div>
