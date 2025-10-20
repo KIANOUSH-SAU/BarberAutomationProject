@@ -39,11 +39,6 @@ const ServicesPage = () => {
 
 	return (
 		<>
-			<nav className="bg-amber-900 text-white p-4">
-				<Link to="/" className="hover:text-amber-200">
-					← Back to Home
-				</Link>
-			</nav>
 			<Services services={servicesData} />
 		</>
 	);

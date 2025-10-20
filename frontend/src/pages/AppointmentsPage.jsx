@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 const AppointmentsPage = () => {
 	return (
 		<div className="min-h-screen bg-stone-100">
-			<nav className="bg-amber-900 text-white p-4 mb-8">
-				<Link to="/" className="hover:text-amber-200">
-					← Back to Home
-				</Link>
-			</nav>
 			<div className="container mx-auto px-4">
 				<h1 className="text-large-title mb-8">Book an Appointment</h1>
 				<div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">

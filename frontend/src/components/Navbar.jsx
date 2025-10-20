@@ -71,7 +71,7 @@ const Navbar = () => {
 							</Link>
 						</li>
 						<li>
-							<Link to="/admin" className="glass-btn-1 flex">
+							<Link to="/login" className="glass-btn-1 flex">
 								<p>Yönetici Girişi</p>
 								<img
 									src={adminIcon}

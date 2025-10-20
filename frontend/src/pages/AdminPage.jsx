@@ -1,5 +1,11 @@
 const AdminPage = () => {
-	return <div>AdminPage</div>;
+	return (
+		<div>
+			<h1>
+				I'm just not there sdfffffffffffffffffffffffffffffffffffffffffff
+			</h1>
+		</div>
+	);
 };
 
 export default AdminPage;
