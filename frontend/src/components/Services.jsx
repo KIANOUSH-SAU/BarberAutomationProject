@@ -1,24 +1,11 @@
+import ServiceCard from "./ServiceCard";
 const Services = ({ services }) => {
 	return (
-		<div className="services-container">
+		<div className="services-container h-screen flex flex-col">
 			<h1 className="text-large-title">Hizmet Seçimi</h1>
-			<h2 className="text-small-title">Servislerimiz:</h2>
-			<div style={{ display: "grid", gap: "20px", padding: "20px" }}>
+			<div className="grid grid-cols-3 gap-5 p-5 flex-1 overflow-auto">
 				{services.map((service) => (
-					<div
-						key={service.id}
-						style={{
-							border: "1px solid #ccc",
-							padding: "20px",
-							borderRadius: "8px",
-						}}
-					>
-						<h3 className="text-small-subtitle">{service.name}</h3>
-						<p className="text-small">💰 Price: ${service.price}</p>
-						<p className="text-small">
-							⏱️ Duration: {service.durationInMinutes} minutes
-						</p>
-					</div>
+					<ServiceCard key={service.id} service={service} />
 				))}
 			</div>
 		</div>

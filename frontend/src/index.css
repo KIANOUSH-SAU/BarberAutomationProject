@@ -1,20 +1,53 @@
 @import "tailwindcss";
 
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 .background {
-	@apply bg-stone-900;
+	background: linear-gradient(
+		135deg,
+		#f8f6f4,
+		#e8e4df,
+		#d4cfc8,
+		#f5f1ed,
+		#fff9f5,
+		#ebe6e1
+	);
+	background-size: 300% 300%;
+	animation: gradientShift 15s ease infinite;
 }
 .services-container {
-	@apply bg-stone-800 px-10 py-10;
+	@apply px-10 py-10;
+	background: linear-gradient(
+		135deg,
+		#f8f6f4,
+		#e8e4df,
+		#d4cfc8,
+		#f5f1ed,
+		#fff9f5,
+		#ebe6e1
+	);
+	background-size: 300% 300%;
+	animation: gradientShift 15s ease infinite;
 }
 .text-large-title {
-	@apply text-amber-200 text-4xl font-bold mb-4 text-center;
+	@apply text-stone-900 text-4xl font-bold mb-4 text-center;
 }
 .text-small-title {
 	@apply text-amber-300 text-3xl font-semibold;
 }
 
 .text-small-subtitle {
-	@apply text-amber-500 text-2xl font-semibold;
+	@apply text-amber-500 text-2xl font-semibold mb-2;
 }
 .text-small {
 	@apply text-amber-50 text-lg font-medium;
