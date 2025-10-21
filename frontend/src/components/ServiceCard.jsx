@@ -1,8 +1,9 @@
 import { IMAGES } from "../assets/assetsHandler";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
 	return (
-		<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+		<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm service-glass-bg">
 			<a href="#">
 				<img
 					className="rounded-t-lg p-10"
@@ -24,12 +25,12 @@ const ServiceCard = ({ service }) => {
 						{service.price + "TL"}
 					</p>
 				</div>
-				<div className="justify-self-end">
-					<a
-						href="#"
-						className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				<div className="justify-self-end justify-center">
+					<Link
+						to="/appointments"
+						className="glass-btn-2 inline-flex gap-2"
 					>
-						Randevu Al
+						<p> Randevu Al</p>
 						<svg
 							className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
 							aria-hidden="true"
@@ -38,14 +39,14 @@ const ServiceCard = ({ service }) => {
 							viewBox="0 0 14 10"
 						>
 							<path
-								stroke="currentColor"
+								stroke="red"
 								strokeLinecap="round"
 								strokeLinejoin="round"
 								strokeWidth="2"
 								d="M1 5h12m0 0L9 1m4 4L9 9"
 							/>
 						</svg>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>
