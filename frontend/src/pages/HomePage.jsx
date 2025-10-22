@@ -58,10 +58,10 @@ const HomePage = () => {
 					takibi yapabilir.
 				</p>
 				<div className="space-x-4">
-					<Link to="/services" className="glass-btn-3">
+					<Link to="/services" className="btn-type-2">
 						Hizmetlerimiz
 					</Link>
-					<Link to="/appointments" className="glass-btn-1">
+					<Link to="/appointments" className="btn-type-3">
 						Yönetici Girişi
 					</Link>
 				</div>

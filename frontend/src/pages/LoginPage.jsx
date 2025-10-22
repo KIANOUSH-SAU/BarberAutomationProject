@@ -28,7 +28,7 @@ const LoginPage = () => {
 					lastName: data.lastName,
 				})
 			);
-			navigate("/appointments");
+			navigate("/admin");
 		}
 	}
 

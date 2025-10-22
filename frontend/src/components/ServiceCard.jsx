@@ -6,7 +6,7 @@ const ServiceCard = ({ service }) => {
 		<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm service-glass-bg">
 			<a href="#">
 				<img
-					className="rounded-t-lg p-10 bg-amber-100"
+					className="rounded-t-lg p-10 bg-amber-300"
 					src={IMAGES[service.id - 1]}
 					alt=""
 				/>

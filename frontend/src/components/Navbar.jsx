@@ -59,24 +59,24 @@ const Navbar = () => {
 							placeholder="Search..."
 						/>
 					</div>
-					<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-white">
+					<ul className="inline-flex flex-col p-4 md:p-0 mt-4 font-medium border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-white">
 						<li>
-							<Link to="/" className="glass-btn-3">
+							<Link to="/" className="btn-type-2">
 								Ana Sayfa
 							</Link>
 						</li>
 						<li>
-							<Link to="/services" className="glass-btn-3">
+							<Link to="/services" className="btn-type-2">
 								Hizmetlerimiz
 							</Link>
 						</li>
 						<li>
-							<Link to="/login" className="glass-btn-1 flex">
-								<p>Yönetici Girişi</p>
+							<Link to="/login" className="btn-type-3">
+								Yönetici Girişi
 								<img
 									src={adminIcon}
 									alt=""
-									className="w-5 h-5 justify-end"
+									className="w-5 h-5"
 								/>
 							</Link>
 						</li>
