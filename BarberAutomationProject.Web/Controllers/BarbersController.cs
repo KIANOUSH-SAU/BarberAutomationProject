@@ -9,10 +9,11 @@ using BarberAutomationProject.Web.Data;
 using BarberAutomationProject.Web.Models;
 using BarberAutomationProject.Web.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BarberAutomationProject.Web.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
+    [Authorize(Roles = Roles.Admin, AuthenticationSchemes = "Identity.Application")]
     public class BarbersController : Controller
     {
         private readonly ApplicationDbContext _context;

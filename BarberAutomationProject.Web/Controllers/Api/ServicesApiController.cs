@@ -1,4 +1,5 @@
 ﻿using BarberAutomationProject.Web.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace BarberAutomationProject.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // <-- Add this! Now JWT token is required
     public class ServicesApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

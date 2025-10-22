@@ -7,6 +7,7 @@ import beardtrim from "./beardtrim.png"
 import skincare from "./skincare.png"
 import barbershop from "./barbershop.jpeg"
 import admin from "./admin.png"
+import login from "./login.jpg"
 
 export const IMAGES = [
     haircut,
@@ -20,3 +21,4 @@ export const IMAGES = [
 
 export const homeBackground = barbershop;
 export const adminIcon = admin;
+export const loginBg = login;

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BarberAutomationProject.Web.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
+    [Authorize(Roles = Roles.Admin, AuthenticationSchemes = "Identity.Application")]
     public class AppointmentRecordsController : Controller
     {
         private readonly ApplicationDbContext _context;

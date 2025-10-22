@@ -1,102 +1,78 @@
-//using BarberAutomationProject.Web.Data;
-//using BarberAutomationProject.Web.Models;
-//using BarberAutomationProject.Web.Services;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity.UI.Services;
-//using Microsoft.EntityFrameworkCore;
-
-//var builder = WebApplication.CreateBuilder(args);
-
-
-//builder.Services.AddControllers();
-
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowReactApp", policy =>
-//    {
-//        policy.WithOrigins("http://localhost:3000") // Vite dev server
-//              .AllowAnyHeader()
-//              .AllowAnyMethod()
-//              .AllowCredentials();
-//    });
-//});
-
-//// Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));
-//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-
-//builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddRoles<IdentityRole>()
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
-//builder.Services.AddControllersWithViews();
-
-//var app = builder.Build();
-
-//// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    //app.UseMigrationsEndPoint();
-//    app.UseDeveloperExceptionPage();
-//    app.UseCors("AllowReactApp");
-//}
-//else
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
-
-//app.UseHttpsRedirection();
-//app.UseStaticFiles();
-
-//app.UseRouting();
-
-//app.UseAuthorization();
-
-////app.MapControllerRoute(
-////    name: "default",
-////    pattern: "{controller=LandingPage}/{action=Index}/{id?}");
-////app.MapRazorPages();
-
-//app.MapControllers();
-//app.MapFallbackToFile("index.html"); 
-
-//app.Run();
-
-
 using BarberAutomationProject.Web.Data;
 using BarberAutomationProject.Web.Models;
 using BarberAutomationProject.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// Database
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// Email
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+// Identity - Configure cookie settings
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Configure Identity cookie (for MVC views)
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+});
+
+// DUAL AUTHENTICATION: Cookie (MVC) + JWT (API)
+builder.Services.AddAuthentication(options =>
+{
+    // Default for API Controllers
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]
+                ?? throw new InvalidOperationException("JWT Key not found")))
+    };
+});
+
+// MVC + API
 builder.Services.AddControllersWithViews();
 
-// ADD THIS: CORS for React frontend
+// CORS for React
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000", "http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -105,11 +81,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
-    app.UseCors("AllowReactApp");  // ADD THIS: Enable CORS in dev
+    app.UseDeveloperExceptionPage();
 }
 else
 {
@@ -120,8 +96,12 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCors("AllowReactApp");
+
 app.UseRouting();
 
+// Authentication MUST come before Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
