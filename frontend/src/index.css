@@ -34,17 +34,13 @@
 
 .glass-bg {
 	@apply backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl;
-	background: rgba(255, 255, 255, 0);
+	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(4px) saturate(180%);
 	-webkit-backdrop-filter: blur(10px) saturate(180%);
 }
 .nav-glass-bg {
 	@apply backdrop-blur-xl shadow-2xl;
-	background: linear-gradient(
-		135deg,
-		rgba(255, 255, 255, 0.1),
-		rgba(255, 255, 255, 0.05)
-	);
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6));
 	backdrop-filter: blur(50px) saturate(180%);
 	-webkit-backdrop-filter: blur(10px) saturate(180%);
 }
@@ -56,23 +52,47 @@
 }
 
 .glass-btn-1 {
-	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-1 gap-1;
+	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none gap-1 cursor-pointer;
 	border-bottom: 4px solid rgb(0, 94, 255);
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 150px;
 	text-align: center;
 }
+.glass-btn-1:hover {
+	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none gap-1 cursor-pointer;
+	border-bottom: 4px solid rgba(0, 0, 0, 0.7);
+	background-color: rgb(0, 94, 255);
+	width: 150px;
+	text-align: center;
+}
 .glass-btn-2 {
-	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-1;
+	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none cursor-pointer;
 	border-bottom: 4px solid rgba(255, 0, 0, 0.729);
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 150px;
 	text-align: center;
 }
+
+.glass-btn-2:hover {
+	@apply shadow-2xl px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none cursor-pointer;
+	border-bottom: 4px solid rgba(0, 0, 0, 0.7);
+	background-color: rgba(255, 0, 0, 0.729);
+	width: 150px;
+	text-align: center;
+}
+
 .glass-btn-3 {
-	@apply shadow-2xl inline-block px-4 py-3 text-white rounded-lg transition font-bold text-sm border-1;
+	@apply shadow-2xl inline-block px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none cursor-pointer;
 	background-color: rgba(0, 0, 0, 0.7);
 	border-bottom: 4px solid rgba(255, 221, 0, 0.877);
+	width: 150px;
+	text-align: center;
+}
+
+.glass-btn-3:hover {
+	@apply shadow-2xl inline-block px-4 py-3 text-white rounded-lg transition font-bold text-sm border-none cursor-pointer;
+	background-color: rgba(255, 221, 0, 0.877);
+	border-bottom: 4px solid rgba(0, 0, 0, 0.7);
 	width: 150px;
 	text-align: center;
 }

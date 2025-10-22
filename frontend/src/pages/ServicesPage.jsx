@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Services from "../components/Services";
-import { Link } from "react-router-dom";
 
 const ServicesPage = () => {
 	const [servicesData, setServicesData] = useState([]);
