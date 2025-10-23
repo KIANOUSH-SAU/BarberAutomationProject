@@ -11,7 +11,6 @@ namespace BarberAutomationProject.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
