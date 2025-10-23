@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorLog from "../components/ErrorLog";
 
 const LoginPage = () => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+	const [isLoginSuccessful, setIsLoginSuccessful] = useState(true);
 	const navigate = useNavigate();
 	const emailRef = useRef();
 	const passwordRef = useRef();
@@ -27,7 +29,10 @@ const LoginPage = () => {
 					lastName: data.lastName,
 				})
 			);
+			setIsLoginSuccessful(true);
 			navigate("/admin");
+		} else {
+			setIsLoginSuccessful(false);
 		}
 	}
 
@@ -58,7 +63,11 @@ const LoginPage = () => {
 
 	return (
 		<div className="simple-dark-bg">
-			<div className="relative z-10 glass-bg rounded-3xl p-20 max-w-3xl mx-4">
+			<div className="relative z-10 bg-blue-950 rounded-3xl p-20 max-w-3xl mx-4">
+				{!isLoginSuccessful && (
+					<ErrorLog message={"E-posta veya Şifreniz hatalı"} />
+				)}
+
 				<h1 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
 					Giriş
 				</h1>
@@ -103,18 +112,15 @@ const LoginPage = () => {
 							<div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
 								<svg
 									className="w-5 h-5 text-gray-500 dark:text-gray-400"
-									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
+									x="0px"
+									y="0px"
+									width="128"
+									height="128"
+									viewBox="0 0 128 128"
+									fill="currentColor"
 								>
-									<path
-										stroke="currentColor"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M12 14v3m-3-6V7a3 3 0 0 1 3-3h.01a3 3 0 0 1 3 3v1m-6 0h6m-6 3H9a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-3"
-									/>
+									<path d="M 51 1 C 41.07 1 33 9.07 33 19 L 33 31.800781 C 23.22 34.450781 16 43.39 16 54 L 16 104 C 16 116.68 26.32 127 39 127 L 89 127 C 101.68 127 112 116.68 112 104 L 112 54 C 112 43.39 104.78 34.450781 95 31.800781 L 95 19 C 95 9.07 86.93 1 77 1 L 51 1 z M 51 7 L 77 7 C 83.62 7 89 12.38 89 19 L 89 31 L 39 31 L 39 19 C 39 12.38 44.38 7 51 7 z M 39 37 L 89 37 C 98.37 37 106 44.63 106 54 L 106 104 C 106 113.37 98.37 121 89 121 L 39 121 C 29.63 121 22 113.37 22 104 L 22 54 C 22 44.63 29.63 37 39 37 z M 64 66 C 56.83 66 51 71.83 51 79 C 51 85.13 55.28 90.280625 61 91.640625 L 61 99 C 61 100.66 62.34 102 64 102 C 65.66 102 67 100.66 67 99 L 67 91.640625 C 72.72 90.280625 77 85.14 77 79 C 77 71.83 71.17 66 64 66 z M 64 72 C 67.86 72 71 75.14 71 79 C 71 82.86 67.86 86 64 86 C 60.14 86 57 82.86 57 79 C 57 75.14 60.14 72 64 72 z"></path>
 								</svg>
 							</div>
 							<input
@@ -173,7 +179,10 @@ const LoginPage = () => {
 						</div>
 					</div>
 					<div className="text-center">
-						<button type="submit" class="btn-type-3 justify-center">
+						<button
+							type="submit"
+							className="btn-type-3 justify-center"
+						>
 							Giriş Yap
 						</button>
 					</div>

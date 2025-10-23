@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { adminIcon } from "../assets/assetsHandler";
 const Navbar = () => {
 	return (
-		<nav className="nav-glass-bg fixed z-10 w-full">
+		<nav className="fixed z-20 w-full bg-blue-950">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-4">
 				<div className="flex md:order-2">
 					<button

@@ -52,7 +52,7 @@ const AppointmentsPage = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-			<div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 md:p-12">
+			<div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 md:p-12 mt-15">
 				<h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">
 					Kolay Randevu Al
 				</h1>
@@ -62,33 +62,52 @@ const AppointmentsPage = () => {
 
 				{loading && (
 					<div className="text-center text-gray-500">
-						Loading services...
+						Yükleniyor...
 					</div>
 				)}
 				{error && (
 					<div className="text-center text-red-500">
-						Error: {error}
+						Hata: {error}
 					</div>
 				)}
 
 				{!loading && !error && (
 					<form onSubmit={handleSubmit} className="space-y-6">
-						<div>
-							<label
-								htmlFor="name"
-								className="block mb-2 text-sm font-medium text-gray-700"
-							>
-								Adınız:
-							</label>
-							<input
-								id="name"
-								type="text"
-								placeholder="KIANOUSH SEDDIGHPOUR"
-								required
-								value={name}
-								onChange={(e) => setName(e.target.value)}
-								className="w-full px-4 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-							/>
+						<div className="flex justify-between">
+							<div className="w-2/5">
+								<label
+									htmlFor="name"
+									className="block mb-2 text-sm font-medium text-gray-700"
+								>
+									Adınız:
+								</label>
+								<input
+									id="name"
+									type="text"
+									placeholder="KIANOUSH"
+									required
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+									className="w-full px-4 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+								/>
+							</div>
+							<div className="w-2/5">
+								<label
+									htmlFor="name"
+									className="block mb-2 text-sm font-medium text-gray-700"
+								>
+									Soyadınız:
+								</label>
+								<input
+									id="name"
+									type="text"
+									placeholder="SEDDIGHPOUR"
+									required
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+									className="w-full px-4 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+								/>
+							</div>
 						</div>
 						<div>
 							<label

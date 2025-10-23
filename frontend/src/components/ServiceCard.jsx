@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
 	return (
-		<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm service-glass-bg">
+		<div className="max-w-sm border border-red-700 rounded-lg shadow-sm bg-blue-950">
 			<a href="#">
 				<img
 					className="rounded-t-lg p-10 bg-white"
