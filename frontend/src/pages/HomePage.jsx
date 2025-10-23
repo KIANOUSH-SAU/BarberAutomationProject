@@ -61,7 +61,10 @@ const HomePage = () => {
 					<Link to="/services" className="btn-type-2">
 						Hizmetlerimiz
 					</Link>
-					<Link to="/appointments" className="btn-type-3">
+					<Link
+						to="/appointments"
+						className="btn-type-3 justify-center"
+					>
 						Yönetici Girişi
 					</Link>
 				</div>

@@ -6,7 +6,7 @@ const ServiceCard = ({ service }) => {
 		<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm service-glass-bg">
 			<a href="#">
 				<img
-					className="rounded-t-lg p-10 bg-amber-300"
+					className="rounded-t-lg p-10 bg-white"
 					src={IMAGES[service.id - 1]}
 					alt=""
 				/>
@@ -28,7 +28,11 @@ const ServiceCard = ({ service }) => {
 				<div className="justify-self-end justify-center">
 					<Link
 						to="/appointments"
-						className="glass-btn-2 inline-flex gap-2"
+						className="btn-type-1 gap-2 inline-flex"
+						style={{
+							width: "150px",
+						}}
+						state={{ service }}
 					>
 						<p> Randevu Al</p>
 						<svg
@@ -39,7 +43,7 @@ const ServiceCard = ({ service }) => {
 							viewBox="0 0 14 10"
 						>
 							<path
-								stroke="red"
+								stroke="white"
 								strokeLinecap="round"
 								strokeLinejoin="round"
 								strokeWidth="2"

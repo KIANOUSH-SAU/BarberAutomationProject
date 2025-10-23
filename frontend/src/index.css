@@ -12,11 +12,6 @@
 	}
 }
 
-.services-container {
-	@apply px-10 py-10;
-	background: rgb(14, 14, 14);
-	background-size: 300% 300%;
-}
 .text-large-title {
 	@apply text-4xl font-bold mb-4 text-center;
 	color: rgba(255, 221, 0, 0.877);
@@ -100,21 +95,20 @@
 .btn-type-1 {
 	@apply text-white bg-red-400
 	hover:bg-red-600 font-medium 
-	rounded-b-xl cursor-pointer text-sm px-5 py-2.5 text-center;
+	rounded-xl cursor-pointer text-sm px-5 py-2.5 text-center;
 	width: 180px;
-	display: inline-block;
 }
 .btn-type-2 {
 	@apply text-white bg-amber-300
 	hover:bg-amber-400 font-medium 
-	rounded-b-xl cursor-pointer text-sm px-5 py-2.5 text-center;
+	rounded-xl cursor-pointer text-sm px-5 py-2.5 text-center;
 	width: 180px;
 	display: inline-block;
 }
 .btn-type-3 {
 	@apply text-white bg-blue-400
 	hover:bg-blue-600 font-medium 
-	rounded-b-xl cursor-pointer text-sm px-5 py-2.5;
+	rounded-xl cursor-pointer text-sm px-5 py-2.5;
 	width: 180px;
 	display: inline-flex;
 	gap: 0.5rem;

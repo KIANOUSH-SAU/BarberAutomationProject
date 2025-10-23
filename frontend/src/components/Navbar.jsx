@@ -61,17 +61,38 @@ const Navbar = () => {
 					</div>
 					<ul className="inline-flex flex-col p-4 md:p-0 mt-4 font-medium border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-white">
 						<li>
-							<Link to="/" className="btn-type-2">
+							<Link
+								to="/"
+								className="btn-type-2"
+								style={{
+									borderBottomRightRadius: "25px",
+									borderBottomLeftRadius: "25px",
+								}}
+							>
 								Ana Sayfa
 							</Link>
 						</li>
 						<li>
-							<Link to="/services" className="btn-type-2">
+							<Link
+								to="/services"
+								className="btn-type-2"
+								style={{
+									borderBottomRightRadius: "25px",
+									borderBottomLeftRadius: "25px",
+								}}
+							>
 								Hizmetlerimiz
 							</Link>
 						</li>
 						<li>
-							<Link to="/login" className="btn-type-3">
+							<Link
+								to="/login"
+								className="btn-type-3 justify-center"
+								style={{
+									borderBottomRightRadius: "25px",
+									borderBottomLeftRadius: "25px",
+								}}
+							>
 								Yönetici Girişi
 								<img
 									src={adminIcon}

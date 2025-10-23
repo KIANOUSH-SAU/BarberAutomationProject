@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const AppointmentsPage = () => {
+	const location = useLocation();
 	const [services, setServices] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -8,7 +10,9 @@ const AppointmentsPage = () => {
 	// State for form inputs
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
-	const [selectedService, setSelectedService] = useState("");
+	const [selectedService, setSelectedService] = useState(
+		location.state?.service?.id || ""
+	);
 	// For a standard date input, it's better to store the date as a string in 'YYYY-MM-DD' format
 	const [appointmentDate, setAppointmentDate] = useState(
 		new Date().toISOString().split("T")[0]
@@ -50,11 +54,10 @@ const AppointmentsPage = () => {
 		<div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
 			<div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 md:p-12">
 				<h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">
-					Book an Appointment
+					Kolay Randevu Al
 				</h1>
 				<p className="text-gray-500 mb-8 text-center">
-					Choose your service and preferred time. We're excited to see
-					you!
+					İstediğiniz servisi ve randevu tarihini seçiniz
 				</p>
 
 				{loading && (
@@ -75,12 +78,12 @@ const AppointmentsPage = () => {
 								htmlFor="name"
 								className="block mb-2 text-sm font-medium text-gray-700"
 							>
-								Your Name
+								Adınız:
 							</label>
 							<input
 								id="name"
 								type="text"
-								placeholder="John Doe"
+								placeholder="KIANOUSH SEDDIGHPOUR"
 								required
 								value={name}
 								onChange={(e) => setName(e.target.value)}
@@ -92,12 +95,12 @@ const AppointmentsPage = () => {
 								htmlFor="phone"
 								className="block mb-2 text-sm font-medium text-gray-700"
 							>
-								Phone Number
+								Telefon Numaranız:
 							</label>
 							<input
 								id="phone"
 								type="tel"
-								placeholder="+1 234 567 8900"
+								placeholder="+90 555 555 5555"
 								required
 								value={phone}
 								onChange={(e) => setPhone(e.target.value)}
@@ -109,7 +112,7 @@ const AppointmentsPage = () => {
 								htmlFor="service"
 								className="block mb-2 text-sm font-medium text-gray-700"
 							>
-								Select Service
+								Seçilen Servis:
 							</label>
 							<select
 								id="service"
@@ -121,11 +124,11 @@ const AppointmentsPage = () => {
 								className="w-full px-4 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
 							>
 								<option value="" disabled>
-									Choose a service...
+									Servis Seçiniz
 								</option>
 								{services.map((service) => (
 									<option key={service.id} value={service.id}>
-										{service.name} - ${service.price}
+										{service.name} - {service.price}TL
 									</option>
 								))}
 							</select>
@@ -135,7 +138,7 @@ const AppointmentsPage = () => {
 								htmlFor="date"
 								className="block mb-2 text-sm font-medium text-gray-700"
 							>
-								Preferred Date
+								Randevu Tarihi
 							</label>
 							<input
 								id="date"
@@ -155,7 +158,7 @@ const AppointmentsPage = () => {
 								borderRadius: "10px",
 							}}
 						>
-							Book Now
+							Randevu Al
 						</button>
 					</form>
 				)}
