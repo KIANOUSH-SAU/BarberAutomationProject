@@ -7,7 +7,7 @@ namespace BarberAutomationProject.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] // Uses JWT automatically
+    [Authorize]
     public class BarbersApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -44,7 +44,7 @@ namespace BarberAutomationProject.Web.Controllers.Api
                         a.IsBooked,
                         DayOfWeek = a.AvailableFrom.DayOfWeek.ToString(),
                         TimeSlot = a.AvailableFrom.ToString("HH:mm") + " - " + a.AvailableTo.ToString("HH:mm")
-                    }).OrderBy(a => a.AvailableFrom)
+                    }).OrderBy(a => a.AvailableFrom).ToList()
                 })
                 .ToListAsync();
 
@@ -79,7 +79,7 @@ namespace BarberAutomationProject.Web.Controllers.Api
                         a.IsBooked,
                         DayOfWeek = a.AvailableFrom.DayOfWeek.ToString(),
                         TimeSlot = a.AvailableFrom.ToString("HH:mm") + " - " + a.AvailableTo.ToString("HH:mm")
-                    }).OrderBy(a => a.AvailableFrom)
+                    }).OrderBy(a => a.AvailableFrom).ToList()
                 })
                 .FirstOrDefaultAsync();
 

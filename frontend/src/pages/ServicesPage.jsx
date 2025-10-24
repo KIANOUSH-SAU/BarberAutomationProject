@@ -13,6 +13,7 @@ const ServicesPage = () => {
 				return res.json();
 			})
 			.then((data) => {
+				console.log(data);
 				setServicesData(data);
 				setLoading(false);
 			})

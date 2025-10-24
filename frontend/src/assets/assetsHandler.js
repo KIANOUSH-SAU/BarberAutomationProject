@@ -8,8 +8,10 @@ import skincare from "./skincare.png"
 import barbershop from "./barbershop.jpeg"
 import admin from "./admin.png"
 import login from "./login.jpg"
+import barberPlaceHolder from "./barberPlaceHolder.png"
 
-export const IMAGES = [
+
+export const SERVICE_IMAGES = [
     haircut,
     eyebrow,
     blowdryer,
@@ -18,6 +20,10 @@ export const IMAGES = [
     beardtrim,
     skincare
 ];
+// export const BARBER_IMAGES = [
+
+// ]
+export const barberPlaceholderImg = barberPlaceHolder;
 
 export const homeBackground = barbershop;
 export const adminIcon = admin;

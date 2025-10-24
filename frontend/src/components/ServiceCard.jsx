@@ -1,4 +1,4 @@
-import { IMAGES } from "../assets/assetsHandler";
+import { SERVICE_IMAGES } from "../assets/assetsHandler";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
@@ -7,7 +7,7 @@ const ServiceCard = ({ service }) => {
 			<a href="#">
 				<img
 					className="rounded-t-lg p-10 bg-white"
-					src={IMAGES[service.id - 1]}
+					src={SERVICE_IMAGES[service.id - 1]}
 					alt=""
 				/>
 			</a>
