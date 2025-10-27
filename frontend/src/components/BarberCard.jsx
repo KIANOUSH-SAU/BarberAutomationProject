@@ -2,10 +2,22 @@ import { barberPlaceholderImg } from "../assets/assetsHandler";
 import { useState } from "react";
 
 const BarberCard = ({ barber }) => {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+	const [isAvailabilitiesDropdownOpen, setIsAvailabilitiesDropdownOpen] =
+		useState(false);
 
-	const toggleDropdown = () => {
-		setIsDropdownOpen(!isDropdownOpen);
+	const toggleServicesDropdown = () => {
+		setIsServicesDropdownOpen(!isServicesDropdownOpen);
+		if (isAvailabilitiesDropdownOpen) {
+			setIsAvailabilitiesDropdownOpen(false);
+		}
+	};
+
+	const toggleAvailabilitiesDropdown = () => {
+		setIsAvailabilitiesDropdownOpen(!isAvailabilitiesDropdownOpen);
+		if (isServicesDropdownOpen) {
+			setIsServicesDropdownOpen(false);
+		}
 	};
 
 	return (
@@ -37,21 +49,21 @@ const BarberCard = ({ barber }) => {
 				</div>
 
 				<button
-					onClick={toggleDropdown}
-					className="text-white bg-blue-700 hover:bg-blue-800 
-                    focus:ring-4 focus:outline-none focus:ring-blue-300 
-                    font-medium rounded-lg text-sm px-5 py-2.5 text-center 
-                    inline-flex items-center dark:bg-blue-600
-                    dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+					onClick={toggleServicesDropdown}
+					className="btn-type-3 justify-between items-center mt-5"
+					style={{
+						width: "200px",
+					}}
 					type="button"
 				>
-					Dropdown button{" "}
+					<span className="w-2.5"></span>
+					<span>Sunduğu Hizmetler</span>
 					<svg
-						className="w-2.5 h-2.5 ms-3"
+						className="w-2.5 h-2.5"
 						aria-hidden="true"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
-						viewBox="0 0 10 6"
+						viewBox="0 0 10 2"
 					>
 						<path
 							stroke="currentColor"
@@ -63,24 +75,63 @@ const BarberCard = ({ barber }) => {
 					</svg>
 				</button>
 
-				{isDropdownOpen && (
-					<div className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 mt-2">
+				{isServicesDropdownOpen && (
+					<div className="absolute z-10 rounded-lg shadow-lg w-[200px] bg-blue-600 mt-2 h-30 overflow-auto">
 						<ul
-							className="py-2 text-sm text-gray-700 dark:text-gray-200"
+							className="py-2 text-sm text-gray-200"
 							aria-labelledby="dropdownDefaultButton"
 						>
-							<li className="block px-4 py-2 cursor-default">
-								Dashboard
-							</li>
-							<li className="block px-4 py-2 cursor-default">
-								Settings
-							</li>
-							<li className="block px-4 py-2 cursor-default">
-								Earnings
-							</li>
-							<li className="block px-4 py-2 cursor-default">
-								Sign out
-							</li>
+							{barber.services.map((service) => (
+								<li
+									key={service.id}
+									className="block px-4 py-2 cursor-default"
+								>
+									{service.name}
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
+				<button
+					onClick={toggleAvailabilitiesDropdown}
+					className="btn-type-2 justify-between items-center mt-5"
+					style={{
+						width: "200px",
+					}}
+					type="button"
+				>
+					<span className="w-2.5"></span>
+					<span>Çalışma Saatleri</span>
+					<svg
+						className="w-2.5 h-2.5"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 10 2"
+					>
+						<path
+							stroke="currentColor"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="2"
+							d="m1 1 4 4 4-4"
+						/>
+					</svg>
+				</button>
+				{isAvailabilitiesDropdownOpen && (
+					<div className="absolute z-10 rounded-lg shadow-lg w-[200px] bg-amber-400 mt-2 h-30 overflow-auto">
+						<ul
+							className="py-2 text-sm text-gray-200"
+							aria-labelledby="dropdownDefaultButton"
+						>
+							{barber.availabilities.map((availability) => (
+								<li
+									key={availability.id}
+									className="block px-4 py-2 cursor-default"
+								>
+									{availability.timeSlot}
+								</li>
+							))}
 						</ul>
 					</div>
 				)}

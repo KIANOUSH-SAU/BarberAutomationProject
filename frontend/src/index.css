@@ -1,17 +1,5 @@
 @import "tailwindcss";
 
-@keyframes gradientShift {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
 .text-large-title {
 	@apply text-4xl font-bold mb-4 text-center;
 	color: rgba(255, 221, 0, 0.877);
@@ -28,10 +16,7 @@
 }
 
 .glass-bg {
-	@apply backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl;
-	background: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(4px) saturate(180%);
-	-webkit-backdrop-filter: blur(10px) saturate(180%);
+	@apply backdrop-blur-xl bg-blue-950 border border-white/20 shadow-2xl opacity-95;
 }
 .simple-dark-bg {
 	@apply min-h-screen bg-gray-900 flex items-center justify-center p-4;
@@ -60,7 +45,9 @@
 	hover:bg-amber-400 font-medium 
 	rounded-xl cursor-pointer text-sm px-5 py-2.5 text-center;
 	width: 180px;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 .btn-type-3 {
 	@apply text-white bg-blue-400
@@ -68,5 +55,6 @@
 	rounded-xl cursor-pointer text-sm px-5 py-2.5;
 	width: 180px;
 	display: inline-flex;
-	gap: 0.5rem;
+	align-items: center;
+	justify-content: center;
 }

@@ -40,10 +40,9 @@ const AdminPage = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 p-10 flex-1 overflow-auto scrollbar-thin scrollbar-thumb-cyan-400 scrollbar-track-cyan-100 mt-15">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 p-10 flex-1 overflow-auto mt-15">
 				{barbers.map((barber) => {
-					// return <h1 key={barber.id}>{barber.name}</h1>;
-					return <BarberCard barber={barber} />;
+					return <BarberCard barber={barber} key={barber.id} />;
 				})}
 			</div>
 		</div>

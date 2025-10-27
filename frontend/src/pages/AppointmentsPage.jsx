@@ -52,16 +52,16 @@ const AppointmentsPage = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-			<div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 md:p-12 mt-15">
-				<h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">
+			<div className="w-full max-w-2xl mx-auto bg-blue-950 rounded-2xl shadow-2xl p-8 md:p-12 mt-15">
+				<h1 className="text-3xl md:text-4xl font-bold text-gray-50 mb-2 text-center">
 					Kolay Randevu Al
 				</h1>
-				<p className="text-gray-500 mb-8 text-center">
+				<p className="text-gray-50 mb-8 text-center">
 					İstediğiniz servisi ve randevu tarihini seçiniz
 				</p>
 
 				{loading && (
-					<div className="text-center text-gray-500">
+					<div className="text-center text-gray-50">
 						Yükleniyor...
 					</div>
 				)}
@@ -77,7 +77,7 @@ const AppointmentsPage = () => {
 							<div className="w-2/5">
 								<label
 									htmlFor="name"
-									className="block mb-2 text-sm font-medium text-gray-700"
+									className="block mb-2 text-sm font-medium text-gray-50"
 								>
 									Adınız:
 								</label>
@@ -94,7 +94,7 @@ const AppointmentsPage = () => {
 							<div className="w-2/5">
 								<label
 									htmlFor="name"
-									className="block mb-2 text-sm font-medium text-gray-700"
+									className="block mb-2 text-sm font-medium text-gray-50"
 								>
 									Soyadınız:
 								</label>
@@ -112,7 +112,7 @@ const AppointmentsPage = () => {
 						<div>
 							<label
 								htmlFor="phone"
-								className="block mb-2 text-sm font-medium text-gray-700"
+								className="block mb-2 text-sm font-medium text-gray-50"
 							>
 								Telefon Numaranız:
 							</label>
@@ -129,7 +129,7 @@ const AppointmentsPage = () => {
 						<div>
 							<label
 								htmlFor="service"
-								className="block mb-2 text-sm font-medium text-gray-700"
+								className="block mb-2 text-sm font-medium text-gray-50"
 							>
 								Seçilen Servis:
 							</label>
@@ -155,7 +155,7 @@ const AppointmentsPage = () => {
 						<div>
 							<label
 								htmlFor="date"
-								className="block mb-2 text-sm font-medium text-gray-700"
+								className="block mb-2 text-sm font-medium text-gray-50"
 							>
 								Randevu Tarihi
 							</label>

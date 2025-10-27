@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorLog from "../components/ErrorLog";
+import AlreadyLoggedInPage from "./AlreadyLoggedInPage";
 
 const LoginPage = () => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -36,18 +37,6 @@ const LoginPage = () => {
 		}
 	}
 
-	// Use token in API calls
-	async function getServices() {
-		const token = localStorage.getItem("authToken");
-
-		const response = await fetch("https://localhost:7261/api/services", {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-
-		return response.json();
-	}
 	function handleSubmit(e) {
 		e.preventDefault();
 		try {
@@ -61,6 +50,9 @@ const LoginPage = () => {
 		setIsPasswordVisible((prevState) => !prevState);
 	}
 
+	if (localStorage.getItem("authToken")) {
+		return <AlreadyLoggedInPage />;
+	}
 	return (
 		<div className="simple-dark-bg">
 			<div className="relative z-10 bg-blue-950 rounded-3xl p-20 max-w-3xl mx-4">

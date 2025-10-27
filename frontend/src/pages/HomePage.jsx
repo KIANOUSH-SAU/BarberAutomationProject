@@ -4,36 +4,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 const HomePage = () => {
 	useGSAP(() => {
-		// Subtle zoom and pan animation for background
 		gsap.to(".bg-animation", {
 			scale: 1.1,
 			duration: 20,
 			ease: "power1.inOut",
 			repeat: -1,
 			yoyo: true,
-		});
-		const glassContainer = document.querySelector(".glass-bg");
-
-		gsap.to(glassContainer, {
-			scale: 1.05,
-			duration: 10,
-			yoyo: true,
-			repeat: -1,
-		});
-
-		glassContainer.addEventListener("mouseenter", () => {
-			gsap.to(glassContainer, {
-				backgroundColor: "rgba(0, 0, 0, 0.25)", // Brighter on hover
-				duration: 0.4,
-				ease: "power2.out",
-			});
-		});
-		glassContainer.addEventListener("mouseleave", () => {
-			gsap.to(glassContainer, {
-				backgroundColor: "rgba(255, 255, 255, 0.05)", // Matches your CSS
-				duration: 0.4,
-				ease: "power2.out",
-			});
 		});
 	}, []);
 	return (
@@ -58,7 +34,7 @@ const HomePage = () => {
 					takibi yapabilir.
 				</p>
 				<div className="space-x-4">
-					<Link to="/services" className="btn-type-2">
+					<Link to="/services" className="btn-type-2 justify-center">
 						Hizmetlerimiz
 					</Link>
 					<Link
