@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Services from "../components/Services";
 
-const ServicesPage = () => {
+const ServicesManagement = () => {
 	const [servicesData, setServicesData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -36,12 +36,7 @@ const ServicesPage = () => {
 				<h1 className="text-4xl text-red-600">Error: {error}</h1>
 			</div>
 		);
-
-	return (
-		<>
-			<Services services={servicesData} isAdmin={false} />
-		</>
-	);
+	return <Services services={servicesData} isAdmin={true} />;
 };
 
-export default ServicesPage;
+export default ServicesManagement;

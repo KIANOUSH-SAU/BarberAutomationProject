@@ -91,28 +91,54 @@ const Navbar = () => {
 					</div>
 					<ul className="inline-flex flex-col p-4 md:p-0 mt-4 font-medium border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-white">
 						<li>
-							<Link
-								to="/"
-								className="btn-type-2 justify-center"
-								style={{
-									borderBottomRightRadius: "25px",
-									borderBottomLeftRadius: "25px",
-								}}
-							>
-								Ana Sayfa
-							</Link>
+							{isLoggedIn ? (
+								<Link
+									to="/employees"
+									className="btn-type-2 justify-center"
+									style={{
+										borderBottomRightRadius: "25px",
+										borderBottomLeftRadius: "25px",
+									}}
+								>
+									Çalışanlar
+								</Link>
+							) : (
+								<Link
+									to="/"
+									className="btn-type-2 justify-center"
+									style={{
+										borderBottomRightRadius: "25px",
+										borderBottomLeftRadius: "25px",
+									}}
+								>
+									Ana Sayfa
+								</Link>
+							)}
 						</li>
 						<li>
-							<Link
-								to="/services"
-								className="btn-type-2 justify-center"
-								style={{
-									borderBottomRightRadius: "25px",
-									borderBottomLeftRadius: "25px",
-								}}
-							>
-								Hizmetlerimiz
-							</Link>
+							{isLoggedIn ? (
+								<Link
+									to="/services-management"
+									className="btn-type-2 justify-center"
+									style={{
+										borderBottomRightRadius: "25px",
+										borderBottomLeftRadius: "25px",
+									}}
+								>
+									Hizmet Yönetimi
+								</Link>
+							) : (
+								<Link
+									to="/services"
+									className="btn-type-2 justify-center"
+									style={{
+										borderBottomRightRadius: "25px",
+										borderBottomLeftRadius: "25px",
+									}}
+								>
+									Hizmetlerimiz
+								</Link>
+							)}
 						</li>
 						<li>
 							<Link

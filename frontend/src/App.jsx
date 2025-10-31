@@ -2,9 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import AppointmentsPage from "./pages/AppointmentsPage";
-import Navbar from "./components/Navbar";
-import AdminPage from "./pages/AdminPage";
+import EmployeesPage from "./pages/EmployeesPage";
+import ServicesManagement from "./pages/ServicesManagement";
 import LoginPage from "./pages/LoginPage";
+import AdminPage from "./pages/AdminPage";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 function App() {
@@ -21,6 +23,11 @@ function App() {
 					/>
 					<Route path="/admin" element={<AdminPage />} />
 					<Route path="/login" element={<LoginPage />} />
+					<Route path="/employees" element={<EmployeesPage />} />
+					<Route
+						path="/services-management"
+						element={<ServicesManagement />}
+					/>
 				</Routes>
 				<Footer />
 			</div>

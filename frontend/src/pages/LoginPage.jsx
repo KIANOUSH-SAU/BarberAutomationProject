@@ -33,7 +33,7 @@ const LoginPage = () => {
 			setIsLoginSuccessful(true);
 			// Dispatch custom event for navbar update
 			window.dispatchEvent(new Event("authChange"));
-			navigate("/admin");
+			navigate("/employees");
 		} else {
 			setIsLoginSuccessful(false);
 		}

@@ -58,3 +58,10 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.admin-btn-type-1 {
+	@apply text-white bg-amber-300
+	hover:bg-amber-400 font-medium 
+	rounded-full cursor-pointer text-sm p-2.5 text-center border-2 border-red-50;
+	width: 50px;
+}

@@ -1,7 +1,7 @@
 import { SERVICE_IMAGES } from "../assets/assetsHandler";
 import { Link } from "react-router-dom";
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, isAdmin }) => {
 	return (
 		<div className="max-w-sm border border-red-700 rounded-lg shadow-sm bg-blue-950">
 			<a href="#">
@@ -25,32 +25,53 @@ const ServiceCard = ({ service }) => {
 						{service.price + "TL"}
 					</p>
 				</div>
-				<div className="justify-self-end justify-center">
-					<Link
-						to="/appointments"
-						className="btn-type-1 gap-2 inline-flex"
-						style={{
-							width: "150px",
-						}}
-						state={{ service }}
-					>
-						<p> Randevu Al</p>
-						<svg
-							className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-							aria-hidden="true"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 14 10"
+				<div className="justify-self-between justify-center mt-4">
+					{isAdmin ? (
+						<div className="flex gap-4">
+							<button
+								className="btn-type-2"
+								style={{
+									width: "100px",
+								}}
+							>
+								Güncelle
+							</button>
+							<button
+								className="btn-type-1"
+								style={{
+									width: "100px",
+								}}
+							>
+								Sil
+							</button>
+						</div>
+					) : (
+						<Link
+							to="/appointments"
+							className="btn-type-1 gap-2 inline-flex"
+							style={{
+								width: "150px",
+							}}
+							state={{ service }}
 						>
-							<path
-								stroke="white"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M1 5h12m0 0L9 1m4 4L9 9"
-							/>
-						</svg>
-					</Link>
+							<p> Randevu Al</p>
+							<svg
+								className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 14 10"
+							>
+								<path
+									stroke="white"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M1 5h12m0 0L9 1m4 4L9 9"
+								/>
+							</svg>
+						</Link>
+					)}
 				</div>
 			</div>
 		</div>
