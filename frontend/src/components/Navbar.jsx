@@ -140,6 +140,20 @@ const Navbar = () => {
 								</Link>
 							)}
 						</li>
+						{isLoggedIn && (
+							<li>
+								<Link
+									to="/appointments-management"
+									className="btn-type-2 justify-center"
+									style={{
+										borderBottomRightRadius: "25px",
+										borderBottomLeftRadius: "25px",
+									}}
+								>
+									Randevu Yönetimi
+								</Link>
+							</li>
+						)}
 						<li>
 							<Link
 								to="/login"
