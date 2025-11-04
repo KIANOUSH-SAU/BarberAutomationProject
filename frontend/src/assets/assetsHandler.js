@@ -9,9 +9,8 @@ import barbershop from "./barbershop.jpeg"
 import admin from "./admin.png"
 import login from "./login.jpg"
 import barberPlaceHolder from "./barberPlaceHolder.png"
-import yeWink from "./yeWink.png"
-import yeThumbsUp from "./yeThumbsUp.png"
-import magneto from "./magneto.png"
+import github from "./github.png"
+import easterEgg from "./easterEgg.jpg"
 
 
 export const SERVICE_IMAGES = [
@@ -31,6 +30,5 @@ export const barberPlaceholderImg = barberPlaceHolder;
 export const homeBackground = barbershop;
 export const adminIcon = admin;
 export const loginBg = login;
-export const yeWinkImg = yeWink;
-export const yeThumbsUpImg = yeThumbsUp;
-export const magnetoImg = magneto;
+export const githubImg = github;
+export const easterEggImg = easterEgg;

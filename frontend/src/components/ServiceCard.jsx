@@ -17,6 +17,7 @@ const ServiceCard = ({ service, isAdmin }) => {
 						{service.name}
 					</h5>
 				</a>
+
 				<div className="flex gap-8">
 					<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
 						{service.durationInMinutes + " Dakika"}
@@ -25,17 +26,18 @@ const ServiceCard = ({ service, isAdmin }) => {
 						{service.price + "TL"}
 					</p>
 				</div>
+
 				<div className="justify-self-between justify-center mt-4">
 					{isAdmin ? (
-						<div className="flex gap-4">
-							<button
+						<div className="flex gap-4 justify-self-end">
+							<Link
+								to="/service-edit"
 								className="btn-type-2"
-								style={{
-									width: "100px",
-								}}
+								style={{ width: "100px" }}
+								state={{ service }}
 							>
-								Güncelle
-							</button>
+								Düzenle
+							</Link>
 							<button
 								className="btn-type-1"
 								style={{
